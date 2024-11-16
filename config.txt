@@ -1,0 +1,3511 @@
+
+CDN Bootstrap Link -->  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+
+Slip 1 
+
+WebTech
+Write the HTML5 code for generating the form as shown below. Apply the internal CSS to the following form to change the font size of the heading to 6pt and change the color to red and also change the background color to yellow.
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Management Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4ec;
+            margin: 0;
+            padding: 0;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #c2ed17;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        h2 {
+            font-size: 6pt;
+            color: red;
+            background-color: yellow;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .priority-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form action="#" method="post">
+        <h2>Project Management</h2>
+
+        <label for="projectName">Project Name:</label>
+        <input type="text" id="projectName" name="projectName" required>
+
+        <label for="assignedTo">Assigned To:</label>
+        <input type="text" id="assignedTo" name="assignedTo" required>
+
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" name="startDate" required>
+
+        <label for="endDate">End Date:</label>
+        <input type="date" id="endDate" name="endDate" required>
+
+        <label>Priority:</label>
+        <div class="priority-options">
+            <label><input type="radio" name="priority" value="high" required> High</label>
+            <label><input type="radio" name="priority" value="medium"> Medium</label>
+            <label><input type="radio" name="priority" value="low"> Low</label>
+        </div>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="5" required></textarea>
+
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+    </form>
+
+</body>
+
+</html>
+
+
+
+MongoDB
+
+Question:
+
+Model the following Property system as a document database. Consider a set of Property, Owner. One owner can buy many properties. Assume appropriate attributes and collections as per the query requirements. Insert at least 05 documents in each collection.
+Answer the following queries:
+a. Display area-wise property details.
+b. Display property owned by 'Abhishek Shinde' having minimum rate.
+c. Give the details of the owner whose property is at "Nashik."
+d. Display area of property whose rate is less than 100000.
+Program:
+
+  
+ 
+# Start MongoDB   
+mongosh
+
+# Create and select the database
+use PropertySystem
+
+# Create and insert documents into the 'owners' collection
+db.owners.insertMany([
+  { _id: 1, name: "Abhishek Shinde", contact: "9876543210" },
+  { _id: 2, name: "Vaibhav Nirmal", contact: "8765432109" },
+  { _id: 3, name: "Gauri Mhaske", contact: "7654321098" },
+  { _id: 4, name: "Pooja Patil", contact: "6543210987" },
+  { _id: 5, name: "Rahul Kale", contact: "5432109876" }
+])
+
+# Create and insert documents into the 'properties' collection
+db.properties.insertMany([
+  { _id: 1, area: "Pune", rate: 150000, owner_id: 1 },
+  { _id: 2, area: "Nashik", rate: 90000, owner_id: 2 },
+  { _id: 3, area: "Mumbai", rate: 250000, owner_id: 3 },
+  { _id: 4, area: "Nashik", rate: 80000, owner_id: 1 },
+  { _id: 5, area: "Aurangabad", rate: 70000, owner_id: 5 }
+])
+
+# a. Display area-wise property details
+db.properties.aggregate([
+  { $group: { _id: "$area", properties: { $push: "$$ROOT" } } }
+])
+
+# b. Display property owned by 'Abhishek Shinde' having minimum rate
+db.properties.find({ owner_id: 1 }).sort({ rate: 1 }).limit(1)
+
+# c. Give the details of the owner whose property is at "Nashik"
+db.properties.aggregate([
+  { $match: { area: "Nashik" } },
+  { $lookup: {
+    from: "owners",
+    localField: "owner_id",
+    foreignField: "_id",
+    as: "owner_details"
+  } }
+])
+
+# d. Display area of property whose rate is less than 100000
+db.properties.find(
+  { rate: { $lt: 100000 } },
+  { _id: 0, area: 1 }
+)
+
+
+
+Slip 2 
+
+WebTech
+Create a container add row inside it and add 3 columns inside row using
+BootStrap
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bootstrap Columns Example</title>
+    <!-- Local Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="p-3 bg-primary text-white text-center">Column 1</div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3 bg-success text-white text-center">Column 2</div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3 bg-danger text-white text-center">Column 3</div>
+            </div>
+        </div>
+    </div>
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+MongoDB
+Question:
+
+Model the following system as a document database. Consider a database of newspaper, publisher, and city. Different publishers publish various newspapers in different cities.
+Assume appropriate attributes and collections as per the query requirements.
+Insert at least 5 documents in each collection.
+Answer the following queries:
+a. List all newspapers available in “Nashik” city.
+b. List all the newspapers of “Marathi” language.
+c. Count the number of publishers in “Gujarat” state.
+d. Write a cursor to show newspapers with the highest sale in Maharashtra State.
+Program:
+
+  
+ 
+# Start MongoDB   
+mongosh
+
+# Create and select the database
+use NewspaperDatabase
+
+# Create and insert documents into the 'publishers' collection
+db.publishers.insertMany([
+  { _id: 1, name: "Lokmat Group", state: "Maharashtra" },
+  { _id: 2, name: "Sandesh Publications", state: "Gujarat" },
+  { _id: 3, name: "Sakal Media", state: "Maharashtra" },
+  { _id: 4, name: "Gujarat Samachar", state: "Gujarat" },
+  { _id: 5, name: "Times Group", state: "Karnataka" }
+])
+
+# Create and insert documents into the 'newspapers' collection
+db.newspapers.insertMany([
+  { _id: 1, title: "Lokmat", language: "Marathi", city: "Nashik", publisher_id: 1, sales: 100000 },
+  { _id: 2, title: "Sakal", language: "Marathi", city: "Pune", publisher_id: 3, sales: 95000 },
+  { _id: 3, title: "Sandesh", language: "Gujarati", city: "Ahmedabad", publisher_id: 2, sales: 80000 },
+  { _id: 4, title: "Gujarat Samachar", language: "Gujarati", city: "Surat", publisher_id: 4, sales: 85000 },
+  { _id: 5, title: "Maharashtra Times", language: "Marathi", city: "Mumbai", publisher_id: 1, sales: 110000 }
+])
+
+# a. List all newspapers available in “Nashik” city
+db.newspapers.find({ city: "Nashik" })
+
+# b. List all the newspapers of “Marathi” language
+db.newspapers.find({ language: "Marathi" })
+
+# c. Count the number of publishers in “Gujarat” state
+db.publishers.countDocuments({ state: "Gujarat" })
+
+# d. Write a cursor to show newspapers with the highest sale in Maharashtra State
+db.newspapers.aggregate([
+  {
+    $lookup: {
+      from: "publishers",
+      localField: "publisher_id",
+      foreignField: "_id",
+      as: "publisher_details"
+    }
+  },
+  { $match: { "publisher_details.state": "Maharashtra" } },
+  { $sort: { sales: -1 } },
+  { $limit: 1 }
+])
+
+
+
+
+
+
+
+
+ Slip 3 
+
+WebTech
+Write a bootstrap application to display thumbnails of the images. 
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Image Thumbnails</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Image Thumbnails</h2>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <img src="images/image1.jpg" alt="Image 1" class="img-fluid rounded">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="thumbnail text-center">
+                    <img src="images/image2.jpg" alt="Image 2" class="img-fluid rounded-circle">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <img src="images/image3.jpg" alt="Image 3" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+
+
+MongoDB
+
+Question:
+
+Model the following system as a document database. Consider employee and department’s information.
+Assume appropriate attributes and collections as per the query requirements.
+Insert at least 5 documents in each collection.
+Answer the following queries:
+a. Display the name of the employee who has the highest salary.
+b. Display the biggest department with the maximum number of employees.
+c. Write a cursor that shows department-wise employee information.
+d. List all the employees who work in the Sales department and have a salary greater than 50,000.
+Program:
+
+  
+ 
+# Start MongoDB   
+mongosh
+
+# Create and select the database
+use EmployeeDatabase
+
+# Create and insert documents into the 'departments' collection
+db.departments.insertMany([
+  { _id: 1, name: "Sales", location: "Mumbai" },
+  { _id: 2, name: "HR", location: "Pune" },
+  { _id: 3, name: "IT", location: "Bangalore" },
+  { _id: 4, name: "Finance", location: "Delhi" },
+  { _id: 5, name: "Marketing", location: "Chennai" }
+])
+
+# Create and insert documents into the 'employees' collection
+db.employees.insertMany([
+  { _id: 1, name: "Abhishek Shinde", department_id: 1, salary: 60000 },
+  { _id: 2, name: "Vaibhav Nirmal", department_id: 1, salary: 75000 },
+  { _id: 3, name: "Gauri Mhaske", department_id: 2, salary: 50000 },
+  { _id: 4, name: "Rohan Patil", department_id: 3, salary: 80000 },
+  { _id: 5, name: "Sneha Kulkarni", department_id: 4, salary: 55000 },
+  { _id: 6, name: "Kunal Joshi", department_id: 5, salary: 45000 },
+  { _id: 7, name: "Pranav Desai", department_id: 1, salary: 85000 }
+])
+
+# a. Display the name of the employee who has the highest salary
+db.employees.find().sort({ salary: -1 }).limit(1)
+
+# b. Display the biggest department with the maximum number of employees
+db.employees.aggregate([
+  { $group: { _id: "$department_id", count: { $sum: 1 } } },
+  { $sort: { count: -1 } },
+  { $limit: 1 },
+  {
+    $lookup: {
+      from: "departments",
+      localField: "_id",
+      foreignField: "_id",
+      as: "department_info"
+    }
+  }
+])
+
+# c. Write a cursor that shows department-wise employee information
+db.employees.aggregate([
+  {
+    $lookup: {
+      from: "departments",
+      localField: "department_id",
+      foreignField: "_id",
+      as: "department_info"
+    }
+  },
+  { $group: { _id: "$department_info.name", employees: { $push: "$$ROOT" } } }
+])
+
+# d. List all the employees who work in the Sales department and have a salary greater than 50,000
+db.employees.aggregate([
+  {
+    $lookup: {
+      from: "departments",
+      localField: "department_id",
+      foreignField: "_id",
+      as: "department_info"
+    }
+  },
+  { $match: { "department_info.name": "Sales", salary: { $gt: 50000 } } }
+])
+
+
+
+
+
+
+
+
+ Slip 4 
+
+WebTech
+Write a bootstrap program for the following
+“The .table class adds basic styling (light padding and only horizontal
+dividers) to a table” The table can have the first name, last name, and email
+id as columns
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bootstrap Table Example</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Basic Styled Table</h2>
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Vaibhav</td>
+                    <td>Sharma</td>
+                    <td>vaibhav.sharma@example.com</td>
+                </tr>
+                <tr>
+                    <td>Abhishek</td>
+                    <td>Kumar</td>
+                    <td>abhishek.kumar@example.com</td>
+                </tr>
+                <tr>
+                    <td>Gauri</td>
+                    <td>Mehta</td>
+                    <td>gauri.mehta@example.com</td>
+                </tr>
+                <tr>
+                    <td>Gautam</td>
+                    <td>Patil</td>
+                    <td>gautam.patil@example.com</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+
+
+
+MongoDB
+
+Question:
+
+Model the following information system as a document database.
+Consider hospitals around Nashik. Each hospital may have one or more specializations like Pediatric, Gynaec, Orthopedic, etc.
+A person can recommend/provide reviews for a hospital. A doctor can give service to one or more hospitals.
+Assume appropriate attributes and collections as per the query requirements.
+Insert at least 10 documents in each collection.
+Answer the following queries:
+a. List the names of hospitals with specific specialization.
+b. List the names of all hospitals located in a specific city.
+c. List the names of hospitals where Dr. Deshmukh visits.
+d. List the names of hospitals with a rating >= 4.
+Program:
+
+  
+ 
+# Start MongoDB   
+mongosh
+
+# Create and select the database
+use HospitalDatabase
+
+# Create and insert documents into the 'hospitals' collection
+db.hospitals.insertMany([
+  { _id: 1, name: "City Care Hospital", city: "Nashik", specialization: ["Pediatric", "Gynaec"], rating: 4.5 },
+  { _id: 2, name: "Health Plus Clinic", city: "Pune", specialization: ["Orthopedic", "Cardiology"], rating: 3.8 },
+  { _id: 3, name: "Wellness Hospital", city: "Nashik", specialization: ["Neurology", "Gynaec"], rating: 4.7 },
+  { _id: 4, name: "Life Line Hospital", city: "Mumbai", specialization: ["Pediatric", "Orthopedic"], rating: 4.0 },
+  { _id: 5, name: "Care and Cure Hospital", city: "Nashik", specialization: ["Dermatology", "Gynaec"], rating: 3.5 },
+  { _id: 6, name: "Healthy Living Hospital", city: "Pune", specialization: ["Orthopedic", "Pediatric"], rating: 4.8 },
+  { _id: 7, name: "Sunrise Clinic", city: "Nashik", specialization: ["Cardiology", "Neurology"], rating: 4.2 },
+  { _id: 8, name: "Green Valley Hospital", city: "Aurangabad", specialization: ["Orthopedic", "Gynaec"], rating: 3.9 },
+  { _id: 9, name: "Harmony Hospital", city: "Nashik", specialization: ["Dermatology", "Orthopedic"], rating: 4.6 },
+  { _id: 10, name: "Prime Health Hospital", city: "Pune", specialization: ["Pediatric", "Gynaec"], rating: 3.8 }
+])
+
+# Create and insert documents into the 'doctors' collection
+db.doctors.insertMany([
+  { _id: 1, name: "Dr. Deshmukh", hospital_ids: [1, 3, 7] },
+  { _id: 2, name: "Dr. Shinde", hospital_ids: [2, 4, 6] },
+  { _id: 3, name: "Dr. Patil", hospital_ids: [5, 8, 9] },
+  { _id: 4, name: "Dr. Kulkarni", hospital_ids: [1, 6, 10] },
+  { _id: 5, name: "Dr. Gaikwad", hospital_ids: [4, 7, 9] }
+])
+
+# a. List the names of hospitals with a specific specialization
+db.hospitals.find({ specialization: "Pediatric" }, { name: 1, _id: 0 })
+
+# b. List the names of all hospitals located in a specific city
+db.hospitals.find({ city: "Nashik" }, { name: 1, _id: 0 })
+
+# c. List the names of hospitals where Dr. Deshmukh visits
+db.doctors.aggregate([
+  { $match: { name: "Dr. Deshmukh" } },
+  {
+    $lookup: {
+      from: "hospitals",
+      localField: "hospital_ids",
+      foreignField: "_id",
+      as: "hospital_info"
+    }
+  },
+  { $unwind: "$hospital_info" },
+  { $project: { "hospital_info.name": 1, _id: 0 } }
+])
+
+# d. List the names of hospitals with a rating >= 4
+db.hospitals.find({ rating: { $gte: 4 } }, { name: 1, _id: 0 })
+
+
+
+
+
+
+ Slip 5 
+
+WebTech
+Write a HTML code, which generate the following output
+ [ Apply border, border radius tags ]
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>List of Persons</title>
+  <style>
+    table {
+      width: 80%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      border: 1px solid black;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: lightgray;
+    }
+
+    caption {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <table>
+    <caption>List of Persons</caption>
+    <tr>
+      <th>Srno</th>
+      <th>Person Name</th>
+      <th>Age</th>
+      <th>Country</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Gauri Mhaske</td>
+      <td>25</td>
+      <td>India</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Vaibhav Nirmal</td>
+      <td>27</td>
+      <td>India</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Abhishek Shinde</td>
+      <td>24</td>
+      <td>India</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Aditya Khalekar</td>
+      <td>26</td>
+      <td>India</td>
+    </tr>
+  </table>
+</body>
+</html>
+
+
+
+
+
+
+MongoDB
+
+Question:
+
+Model the following database. Many employees working on one project. A company has various ongoing projects.
+Assume appropriate attributes and collections as per the query requirements.
+Insert at least 5 documents in each collection.
+Answer the following queries:
+a. List all names of projects where Project_type = ....
+b. List all the projects with duration greater than 3 months.
+c. Count the number of employees working on a specific project.
+d. List the names of projects on which Mr. Patil is working.
+Program:
+
+  
+ 
+# Start MongoDB   
+mongosh
+
+# Create and select the database
+use CompanyDatabase
+
+# Create and insert documents into the 'projects' collection (5 records)
+db.projects.insertMany([
+  { _id: 1, name: "Project Alpha", project_type: "Software", duration: 6 },
+  { _id: 2, name: "Project Beta", project_type: "Hardware", duration: 4 },
+  { _id: 3, name: "Project Gamma", project_type: "Software", duration: 2 },
+  { _id: 4, name: "Project Delta", project_type: "Software", duration: 8 },
+  { _id: 5, name: "Project Epsilon", project_type: "Hardware", duration: 3 }
+])
+
+# Create and insert documents into the 'employees' collection (5 records)
+db.employees.insertMany([
+  { _id: 1, name: "Mr. Patil", project_ids: [1, 3] },
+  { _id: 2, name: "Mr. Shinde", project_ids: [2, 4] },
+  { _id: 3, name: "Mr. Nirmal", project_ids: [5, 4] },
+  { _id: 4, name: "Mr. Mhaske", project_ids: [1, 2] },
+  { _id: 5, name: "Mr. Joshi", project_ids: [3, 4] }
+])
+
+# a. List all names of projects where Project_type = "Software"
+db.projects.find({ project_type: "Software" }, { name: 1, _id: 0 })
+
+# b. List all the projects with duration greater than 3 months
+db.projects.find({ duration: { $gt: 3 } }, { name: 1, _id: 0 })
+
+# c. Count the number of employees working on "Project Alpha"
+db.employees.find({ project_ids: 1 }).count()
+
+# d. List the names of projects on which Mr. Patil is working
+db.employees.aggregate([
+  { $match: { name: "Mr. Patil" } },
+  {
+    $lookup: {
+      from: "projects",
+      localField: "project_ids",
+      foreignField: "_id",
+      as: "project_info"
+    }
+  },
+  { $unwind: "$project_info" },
+  { $project: { "project_info.name": 1, _id: 0 } }
+])
+
+
+
+
+
+ Slip 6 
+
+WebTech
+Create a web page being rendered in the browser consists of many things -
+ logo, informative text, pictures, hyperlinks, navigational structure and table.
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Web Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        nav {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            width: 50%;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Logo" width="100">
+        <h1>Welcome to My Web Page</h1>
+    </header>
+    <nav>
+        <a href="#home">Home</a> | 
+        <a href="#about">About</a> | 
+        <a href="#contact">Contact</a>
+    </nav>
+    <section>
+        <h2>Informative Text</h2>
+        <p>This is a simple webpage example to demonstrate basic HTML and CSS. It includes various elements like text, images, navigation links, and a table.</p>
+    </section>
+    <section>
+        <h2>Picture</h2>
+        <img src="picture.jpg" alt="Example Picture" width="300">
+    </section>
+    <section>
+        <h2>Data Table</h2>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>City</th>
+            </tr>
+            <tr>
+                <td>Abhishek</td>
+                <td>25</td>
+                <td>New York</td>
+            </tr>
+            <tr>
+                <td>Vaibhav</td>
+                <td>28</td>
+                <td>Pimpri Nirmal</td>
+            </tr>
+            <tr>
+              <td>Gauri </td>
+              <td>20</td>
+              <td>Pimpri Nirmal</td>
+          </tr>
+        </table>
+    </section>
+</body>
+</html>
+
+
+
+MongoDB
+
+Question:
+
+Model the following information as a document database. A customer can take different policies and get the benefit. There are different types of policies provided by various companies.
+Assume appropriate attributes and collections as per the query requirements.
+Insert at least 5 documents in each collection.
+Answer the following queries:
+a. List the details of customers who have taken "Komal Jeevan" Policy.
+b. Display average premium amount.
+c. Increase the premium amount by 5% for policy type="Monthly".
+d. Count the number of customers who have taken the policy type "half yearly".
+Program:
+
+  
+ 
+# Start MongoDB   
+mongosh
+
+# Create and select the database
+use InsuranceDatabase
+
+# Create and insert documents into the 'customers' collection (5 records)
+db.customers.insertMany([
+  { _id: 1, name: "Mr. Patil", policies: [{ policy_name: "Komal Jeevan", policy_type: "Yearly", premium: 5000 }] },
+  { _id: 2, name: "Mr. Shinde", policies: [{ policy_name: "Life Shield", policy_type: "Monthly", premium: 2000 }] },
+  { _id: 3, name: "Mr. Nirmal", policies: [{ policy_name: "Komal Jeevan", policy_type: "Half Yearly", premium: 3000 }] },
+  { _id: 4, name: "Mr. Mhaske", policies: [{ policy_name: "Komal Jeevan", policy_type: "Monthly", premium: 1500 }] },
+  { _id: 5, name: "Mr. Joshi", policies: [{ policy_name: "Term Guard", policy_type: "Yearly", premium: 6000 }] }
+])
+
+# a. List the details of customers who have taken "Komal Jeevan" Policy
+db.customers.find({ "policies.policy_name": "Komal Jeevan" }, { name: 1, policies: 1, _id: 0 })
+
+# b. Display average premium amount
+db.customers.aggregate([
+  { $unwind: "$policies" },
+  { $group: { _id: null, avgPremium: { $avg: "$policies.premium" } } }
+])
+
+# c. Increase the premium amount by 5% for policy type="Monthly"
+db.customers.updateMany(
+  { "policies.policy_type": "Monthly" },
+  { $mul: { "policies.$.premium": 1.05 } }
+)
+
+# d. Count the number of customers who have taken policy type "Half Yearly"
+db.customers.find({ "policies.policy_type": "Half Yearly" }).count()
+
+
+
+
+
+
+ Slip 7 
+
+WebTech
+Create a 3D text, apply appropriate font, style, color. Use : Hover in the
+style selector so that the 3D effects appear only when you hover over
+the text
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>3D Hover Text</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        h1 {
+            font-size: 50px;
+            color: #333;
+            transition: 0.3s ease-in-out;
+        }
+        h1:hover {
+            color: #ff6600;
+            text-shadow: 2px 2px 5px #aaa, -2px -2px 5px #aaa;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hover Over Me</h1>
+</body>
+</html>
+
+
+MongoDB
+
+Question:
+
+Model the following information as a document database. A customer operates his bank account, does various transactions, and gets the banking services.
+Assume appropriate attributes and collections as per the query requirements.
+Insert at least 5 documents in each collection.
+Answer the following queries:
+a. List names of all customers whose first name starts with a “S”.
+b. List all customers who have opened an account on 1/1/2020 in ___branch.
+c. List the names of customers where acctype="Saving".
+d. Count the total number of loan account holders in ______ branch.
+Program:
+
+  
+ 
+# Start MongoDB   
+mongosh
+
+# Create and select the database
+use BankingDatabase
+
+# Create and insert documents into the 'customers' collection (5 records)
+db.customers.insertMany([
+  { _id: 1, first_name: "Sanjay", last_name: "Patil", accounts: [{ acctype: "Saving", branch: "Nashik", opening_date: "2020-01-01", balance: 10000 }] },
+  { _id: 2, first_name: "Rajesh", last_name: "Shinde", accounts: [{ acctype: "Current", branch: "Mumbai", opening_date: "2019-12-15", balance: 15000 }] },
+  { _id: 3, first_name: "Siddharth", last_name: "Mhaske", accounts: [{ acctype: "Saving", branch: "Nashik", opening_date: "2020-01-01", balance: 20000 }] },
+  { _id: 4, first_name: "Vishal", last_name: "Nirmal", accounts: [{ acctype: "Loan", branch: "Pune", opening_date: "2018-11-20", balance: 30000 }] },
+  { _id: 5, first_name: "Suresh", last_name: "Joshi", accounts: [{ acctype: "Saving", branch: "Nashik", opening_date: "2020-01-01", balance: 5000 }] }
+])
+
+# a. List names of all customers whose first name starts with a "S"
+db.customers.find({ "first_name": /^S/ }, { first_name: 1, last_name: 1, _id: 0 })
+
+# b. List all customers who have opened an account on 1/1/2020 in Nashik branch
+db.customers.find({ "accounts.opening_date": "2020-01-01", "accounts.branch": "Nashik" }, { first_name: 1, last_name: 1, _id: 0 })
+
+# c. List the names of customers where acctype="Saving"
+db.customers.find({ "accounts.acctype": "Saving" }, { first_name: 1, last_name: 1, _id: 0 })
+
+# d. Count the total number of loan account holders in Nashik branch
+db.customers.find({ "accounts.acctype": "Loan", "accounts.branch": "Nashik" }).count()
+
+
+
+
+
+
+
+ Slip 8 
+
+WebTech
+Create a button with different style (Secondary, Primary, Success, Error, Info,
+Warning, Danger) using BootStrap
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Buttons</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" >
+</head>
+<body>
+    <div class="container text-center" style="margin-top: 50px;">
+        <h1>Bootstrap Button Styles</h1>
+        <button class="btn btn-primary">Primary</button>
+        <button class="btn btn-secondary">Secondary</button>
+        <button class="btn btn-success">Success</button>
+        <button class="btn btn-danger">Danger</button>
+        <button class="btn btn-info">Info</button>
+        <button class="btn btn-warning">Warning</button>
+    </div>
+</body>
+</html>
+
+
+
+MongoDB
+
+Question:
+
+Model the following inventory information as a document database. The inventory keeps track of various items. The items are tagged in various categories. Items may be kept in various warehouses, and each warehouse keeps track of the quantity of the item.
+Assume appropriate attributes and collections as per the query requirements.
+Insert at least 5 documents in each collection.
+Answer the following queries:
+a. List all the items where the quantity is greater than 300.
+b. List all items which have tags less than 5.
+c. List all items having status equal to “B” or having quantity less than 50 and height of the product should be greater than 8.
+d. Find all warehouses that keep item “Planner” and have in stock quantity less than 20.
+Program:
+
+  
+ 
+# Start MongoDB   
+mongosh
+
+# Create and select the database
+use InventoryDatabase
+
+# Create and insert documents into the 'items' collection (5 records)
+db.items.insertMany([
+  { _id: 1, name: "Planner", status: "A", tags: 6, height: 10, quantity: 400, warehouses: [{ warehouse_name: "Warehouse1", stock_quantity: 50 }] },
+  { _id: 2, name: "Notepad", status: "B", tags: 4, height: 6, quantity: 250, warehouses: [{ warehouse_name: "Warehouse2", stock_quantity: 80 }] },
+  { _id: 3, name: "Eraser", status: "C", tags: 3, height: 4, quantity: 500, warehouses: [{ warehouse_name: "Warehouse3", stock_quantity: 120 }] },
+  { _id: 4, name: "Marker", status: "B", tags: 2, height: 9, quantity: 30, warehouses: [{ warehouse_name: "Warehouse1", stock_quantity: 10 }] },
+  { _id: 5, name: "Pen", status: "A", tags: 3, height: 7, quantity: 100, warehouses: [{ warehouse_name: "Warehouse2", stock_quantity: 20 }] }
+])
+
+# a. List all the items where the quantity is greater than 300
+db.items.find({ "quantity": { $gt: 300 } }, { name: 1, quantity: 1, _id: 0 })
+
+# b. List all items which have tags less than 5
+db.items.find({ "tags": { $lt: 5 } }, { name: 1, tags: 1, _id: 0 })
+
+# c. List all items having status equal to “B” or having quantity less than 50 and height of the product should be greater than 8
+db.items.find({
+  $or: [
+    { "status": "B" },
+    { "quantity": { $lt: 50 }, "height": { $gt: 8 } }
+  ]
+}, { name: 1, status: 1, quantity: 1, height: 1, _id: 0 })
+
+# d. Find all warehouses that keep item “Planner” and have in stock quantity less than 20
+db.items.find({ "name": "Planner", "warehouses.stock_quantity": { $lt: 20 } }, { "warehouses.warehouse_name": 1, _id: 0 })
+
+
+
+
+
+
+
+ Slip 9 
+
+WebTech
+Write an HTML 5 program for student registration form for college
+admission. Use input type like search, email, date etc
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            width: 300px;
+            margin: auto;
+        }
+        h4 {
+            margin: 10px 0 5px;
+        }
+        input {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+        }
+        button {
+            width: 100%;
+            padding: 7px;
+            background-color: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center;">College Admission Form</h1>
+    <form>
+        <h4>Full Name</h4>
+        <input type="text" placeholder="Enter your name" required>
+
+        <h4>Search Course</h4>
+        <input type="search" placeholder="Search for a course" required>
+
+        <h4>Email Address</h4>
+        <input type="email" placeholder="Enter your email" required>
+
+        <h4>Date of Birth</h4>
+        <input type="date" required>
+
+        <h4>Mobile Number</h4>
+        <input type="tel" placeholder="Enter your mobile number" required>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
+
+
+
+MongoDB
+
+Question:
+
+Model the following Customer Loan information as a document database. Consider a Customer Loan information system where the customer can take many types of loans.
+Assume appropriate attributes and collections as per the query requirements.
+Insert at least 10 documents in each collection.
+Answer the following Queries:
+a. List all customers whose name starts with 'D' character.
+b. List the names of customers in descending order who have taken a loan from Pimpri city.
+c. Display customer details having the maximum loan amount.
+d. Update the address of a customer whose name is “Mr. Patil” and loan amount is greater than 100000.
+Program:
+
+  
+ 
+# Start MongoDB   
+mongosh
+
+# Create and select the database
+use CustomerLoanDB
+
+# Create and insert documents into the 'customers' collection (10 records)
+db.customers.insertMany([
+  { _id: 1, name: "Dinesh Shinde", address: "Pune", loans: [{ type: "Home", amount: 500000, city: "Pimpri" }] },
+  { _id: 2, name: "Deepak Joshi", address: "Nashik", loans: [{ type: "Car", amount: 300000, city: "Pimpri" }] },
+  { _id: 3, name: "Abhishek Nirmal", address: "Mumbai", loans: [{ type: "Personal", amount: 100000, city: "Mumbai" }] },
+  { _id: 4, name: "Mr. Patil", address: "Nagpur", loans: [{ type: "Education", amount: 200000, city: "Pimpri" }] },
+  { _id: 5, name: "Gauri Mhaske", address: "Aurangabad", loans: [{ type: "Home", amount: 150000, city: "Pune" }] },
+  { _id: 6, name: "Vaibhav Kale", address: "Pimpri", loans: [{ type: "Car", amount: 120000, city: "Pimpri" }] },
+  { _id: 7, name: "Dipak Gawade", address: "Pimpri", loans: [{ type: "Personal", amount: 70000, city: "Pimpri" }] },
+  { _id: 8, name: "Darshan Pawar", address: "Pune", loans: [{ type: "Home", amount: 250000, city: "Pimpri" }] },
+  { _id: 9, name: "Sunita More", address: "Mumbai", loans: [{ type: "Education", amount: 450000, city: "Mumbai" }] },
+  { _id: 10, name: "Rahul Deshmukh", address: "Nashik", loans: [{ type: "Home", amount: 550000, city: "Mumbai" }] }
+])
+
+# a. List all customers whose name starts with 'D' character
+db.customers.find({ name: /^D/ }, { name: 1, _id: 0 })
+
+# b. List the names of customers in descending order who have taken a loan from Pimpri city
+db.customers.find({ "loans.city": "Pimpri" }, { name: 1, _id: 0 }).sort({ name: -1 })
+
+# c. Display customer details having maximum loan amount
+db.customers.find().sort({ "loans.amount": -1 }).limit(1)
+
+# d. Update the address of a customer whose name is "Mr. Patil" and loan amount is greater than 100000
+db.customers.updateOne(
+  { name: "Mr. Patil", "loans.amount": { $gt: 100000 } },
+  { $set: { address: "Updated Address" } }
+)
+
+
+
+
+
+
+
+Slip 10 
+
+WebTech
+Create a web page that shows use of transition properties, transition delay and duration effect.
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transition Effects</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            margin: auto;
+            transition: background-color 2s ease, transform 1s ease 1s;
+        }
+        .box:hover {
+            background-color: orange;
+            transform: scale(1.5);
+        }
+    </style>
+</head>
+<body>
+    <h1>Hover to See Transition Effects</h1>
+    <div class="box"></div>
+</body>
+</html>
+
+
+
+MongoDB
+
+Question:
+
+Model the following Online shopping information as a document database. Consider online shopping where the customer can get different products from different brands. Customers can rate the brands and products.
+Assume appropriate attributes and collections as per the query requirements.
+Insert at least 5 documents in each collection.
+Answer the following Queries:
+a. List the names of products whose warranty period is one year.
+b. List the customers who have done purchases on “15/08/2023”.
+c. Display the names of products with the brand which have the highest rating.
+d. Display customers who stay in a particular city and bill amount > 50000.
+Program:
+
+  
+ 
+# Start MongoDB   
+mongosh
+
+# Create and select the database
+use OnlineShoppingDB
+
+# Create and insert documents into 'products' collection (5 records)
+db.products.insertMany([
+  { _id: 1, name: "Smartphone", brand: "Apple", warranty_period: 1, rating: 4.5, price: 70000 },
+  { _id: 2, name: "Laptop", brand: "Dell", warranty_period: 2, rating: 4.3, price: 50000 },
+  { _id: 3, name: "Headphones", brand: "Sony", warranty_period: 1, rating: 4.8, price: 15000 },
+  { _id: 4, name: "Smartwatch", brand: "Samsung", warranty_period: 1, rating: 4.2, price: 20000 },
+  { _id: 5, name: "Air Purifier", brand: "Dyson", warranty_period: 3, rating: 4.6, price: 30000 }
+])
+
+# Create and insert documents into 'customers' collection (5 records)
+db.customers.insertMany([
+  { _id: 1, name: "John Doe", city: "Mumbai", purchase_date: "2023-08-15", billamt: 70000 },
+  { _id: 2, name: "Jane Smith", city: "Pune", purchase_date: "2023-08-14", billamt: 40000 },
+  { _id: 3, name: "Rajesh Patil", city: "Mumbai", purchase_date: "2023-08-15", billamt: 60000 },
+  { _id: 4, name: "Anita Kumar", city: "Nagpur", purchase_date: "2023-08-13", billamt: 20000 },
+  { _id: 5, name: "Vikas Singh", city: "Mumbai", purchase_date: "2023-08-12", billamt: 50000 }
+])
+
+# a. List the names of products whose warranty period is one year
+db.products.find({ warranty_period: 1 }, { name: 1, _id: 0 })
+
+# b. List the customers who have done purchases on “15/08/2023”
+db.customers.find({ purchase_date: "2023-08-15" }, { name: 1, _id: 0 })
+
+# c. Display the names of products with the brand which have the highest rating
+db.products.find().sort({ rating: -1 }).limit(1)
+
+# d. Display customers who stay in Mumbai city and have a bill amount greater than 50000
+db.customers.find({ city: "Mumbai", billamt: { $gt: 50000 } }, { name: 1, city: 1, billamt: 1 })
+
+
+
+
+
+
+
+Slip 11 
+
+WebTech
+Write a HTML code which will divide web page in three frames. First frame
+should consists of company name as heading. Second frame should consists
+of name of departments with hyperlink. Once click on any department, it
+should display information of that department in third frame.
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Company Frames</title>
+</head>
+<frameset rows="20%, 80%" border="1">
+    <frame src="header.html" name="header">
+    <frameset cols="30%, 70%">
+        <frame src="departments.html" name="menu">
+        <frame src="default.html" name="content">
+    </frameset>
+</frameset>
+</html>
+
+<!-- Create  new header.html file and use following code --->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Header</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>ABC Company</h1>
+</body>
+</html>
+
+<!-- Create  new departments.html file and use following code --->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Departments</title>
+    
+</head>
+<body>
+    <h4>Departments</h4>
+    <a href="hr.html" target="content">HR Department</a>
+    <a href="sales.html" target="content">Sales Department</a>
+    <a href="it.html" target="content">IT Department</a>
+</body>
+</html>
+
+<!-- Create  new default.html file and use following code --->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2>Welcome to ABC Company</h2>
+    <p>Select a department to view details.</p>
+</body>
+</html>
+
+
+
+
+
+
+MongoDB
+
+Question:
+
+Model the following sales system as a document database. Consider a set of products, customers, orders, and invoices. An invoice is generated when an order is processed.
+Assume appropriate attributes and collections as per the query requirements.
+Insert at least 5 documents in each collection.
+Answer the following Queries:
+a. List all products in the inventory.
+b. List the details of orders with a value greater than 20,000.
+c. List all the orders which have not been processed (invoice not generated).
+d. List all the orders along with their invoice for “Mr. Rajiv”.
+Program:
+
+  
+ 
+# Start MongoDB   
+mongosh
+
+# Create and select the database
+use SalesSystemDB
+
+# Create and insert documents into 'products' collection (5 records)
+db.products.insertMany([
+  { _id: 1, name: "Laptop", price: 50000, stock: 30 },
+  { _id: 2, name: "Smartphone", price: 25000, stock: 50 },
+  { _id: 3, name: "Tablet", price: 15000, stock: 20 },
+  { _id: 4, name: "Headphones", price: 5000, stock: 100 },
+  { _id: 5, name: "Smartwatch", price: 10000, stock: 40 }
+])
+
+# Create and insert documents into 'customers' collection (5 records)
+db.customers.insertMany([
+  { _id: 1, name: "Mr. Rajiv", city: "Mumbai", email: "rajiv@email.com" },
+  { _id: 2, name: "Ms. Anita", city: "Delhi", email: "anita@email.com" },
+  { _id: 3, name: "Mr. Karan", city: "Bangalore", email: "karan@email.com" },
+  { _id: 4, name: "Mr. Rohit", city: "Chennai", email: "rohit@email.com" },
+  { _id: 5, name: "Ms. Priya", city: "Pune", email: "priya@email.com" }
+])
+
+# Create and insert documents into 'orders' collection (5 records)
+db.orders.insertMany([
+  { _id: 1, customer_id: 1, product_id: 1, quantity: 1, status: "Processed", order_date: "2023-08-01", total_value: 50000 },
+  { _id: 2, customer_id: 2, product_id: 2, quantity: 2, status: "Not Processed", order_date: "2023-08-02", total_value: 50000 },
+  { _id: 3, customer_id: 3, product_id: 3, quantity: 1, status: "Not Processed", order_date: "2023-08-03", total_value: 15000 },
+  { _id: 4, customer_id: 4, product_id: 4, quantity: 5, status: "Processed", order_date: "2023-08-04", total_value: 25000 },
+  { _id: 5, customer_id: 5, product_id: 5, quantity: 3, status: "Processed", order_date: "2023-08-05", total_value: 30000 }
+])
+
+# Create and insert documents into 'invoices' collection (5 records)
+db.invoices.insertMany([
+  { _id: 1, order_id: 1, invoice_date: "2023-08-01", amount: 50000 },
+  { _id: 2, order_id: 4, invoice_date: "2023-08-04", amount: 25000 },
+  { _id: 3, order_id: 5, invoice_date: "2023-08-05", amount: 30000 }
+])
+
+# a. List all products in the inventory
+db.products.find({}, { name: 1, price: 1, stock: 1, _id: 0 })
+
+# b. List the details of orders with a value > 20000
+db.orders.find({ total_value: { $gt: 20000 } }, { _id: 0 })
+
+# c. List all the orders which have not been processed (invoice not generated)
+db.orders.find({ status: "Not Processed" }, { _id: 0 })
+
+# d. List all the orders along with their invoice for "Mr. Rajiv"
+db.orders.aggregate([
+  { $match: { customer_id: 1 } },
+  {
+    $lookup: {
+      from: "invoices",
+      localField: "_id",
+      foreignField: "order_id",
+      as: "invoice_details"
+    }
+  },
+  { $project: { order_id: 1, customer_id: 1, total_value: 1, invoice_details: 1, _id: 0 } }
+])
+
+
+
+
+
+
+Slip 12 
+
+WebTech
+Design an appropriate HTML form for customer registration visiting a
+departmental store. Form should consist of fields such as name, contact no,
+gender, preferred days of purchasing, favorite item (to be selected from a
+list of items), suggestions etc. You should provide button to submit as well
+as reset the form contents.
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Registration</title>
+    <style>
+    form {
+        width: 300px;
+        margin: auto;
+    font-family: Arial, sans-serif; 
+    align-items: center;
+    }
+
+button {
+        background-color: blue;
+        color: white;
+        border: none;
+    }</style>
+</head>
+<body>
+    <h1 style="text-align:center;">Customer Registration</h1>
+    <form>
+        <h4>Full Name</h4>
+        <input type="text" placeholder="Enter your name" required>
+
+        <h4>Contact Number</h4>
+        <input type="tel" placeholder="Enter your contact number" required>
+
+        <h4>Gender</h4>
+        <input type="radio" name="gender" value="Male" required> Male
+        <input type="radio" name="gender" value="Female" required> Female
+
+        <h4>Preferred Days of Purchasing</h4>
+        <input type="checkbox" name="days" value="Monday"> Monday
+        <input type="checkbox" name="days" value="Wednesday"> Wednesday
+        <input type="checkbox" name="days" value="Friday"> Friday
+
+        <h4>Favorite Item</h4>
+        <select required>
+            <option value="Electronics">Electronics</option>
+            <option value="Clothing">Clothing</option>
+            <option value="Furniture">Furniture</option>
+        </select>
+
+        <h4>Suggestions</h4>
+        <textarea placeholder="Enter your suggestions" rows="4" required></textarea>
+<br><br>
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+    </form>
+</body>
+</html>
+
+
+
+MongoDB
+
+Question:
+
+Model the following online movie information as a document database. Consider online movie information where each actor has acted in one or more movies. Each producer has produced many movies but each movie can be produced by more than one producer. Each movie has one or more actors acting in it, in different roles.
+Assume appropriate attributes and collections as per the query requirements.
+Insert at least 5 documents in each collection.
+Answer the following Queries:
+a. List the names of movies with the highest budget.
+b. Display the details of producers who have produced more than one movie in a year.
+c. List the names of actors who have acted in at least one movie, in which ‘Akshay’ has acted.
+d. List the names of movies produced by more than one producer.
+Program:
+
+  
+ 
+# Start MongoDB   
+mongosh
+
+# Create and select the database
+use MovieDatabase
+
+# Create and insert documents into 'movies' collection (5 records)
+db.movies.insertMany([
+  { _id: 1, title: "Blockbuster Movie 1", budget: 15000000, release_date: "2024-01-15" },
+  { _id: 2, title: "Super Hit Movie 2", budget: 20000000, release_date: "2023-07-25" },
+  { _id: 3, title: "Average Movie 3", budget: 8000000, release_date: "2023-09-10" },
+  { _id: 4, title: "Flop Movie 4", budget: 5000000, release_date: "2024-02-20" },
+  { _id: 5, title: "Blockbuster Movie 5", budget: 30000000, release_date: "2024-03-10" }
+])
+
+# Create and insert documents into 'actors' collection (5 records)
+db.actors.insertMany([
+  { _id: 1, name: "Akshay Kumar", age: 54, movies: [1, 2, 3] },
+  { _id: 2, name: "Rajinikanth", age: 73, movies: [2, 5] },
+  { _id: 3, name: "Deepika Padukone", age: 37, movies: [1, 3, 4] },
+  { _id: 4, name: "Ranveer Singh", age: 38, movies: [1, 4, 5] },
+  { _id: 5, name: "Katrina Kaif", age: 39, movies: [2, 3] }
+])
+
+# Create and insert documents into 'producers' collection (5 records)
+db.producers.insertMany([
+  { _id: 1, name: "Producer A", movies: [1, 3] },
+  { _id: 2, name: "Producer B", movies: [2, 4] },
+  { _id: 3, name: "Producer C", movies: [5] },
+  { _id: 4, name: "Producer D", movies: [1, 2, 4] },
+  { _id: 5, name: "Producer E", movies: [3, 5] }
+])
+
+# a. List the names of movies with the highest budget
+db.movies.find({}, { title: 1, budget: 1, _id: 0 }).sort({ budget: -1 }).limit(1)
+
+# b. Display the details of producers who have produced more than one movie in a year
+db.producers.aggregate([
+  { $unwind: "$movies" },
+  { $group: { _id: "$_id", name: { $first: "$name" }, moviesCount: { $sum: 1 } } },
+  { $match: { moviesCount: { $gt: 1 } } }
+])
+
+# c. List the names of actors who have acted in at least one movie in which 'Akshay' has acted
+db.actors.find({ movies: { $in: [1, 2, 3] } }, { name: 1, _id: 0 })
+
+# d. List the names of movies produced by more than one producer
+db.movies.aggregate([
+  { $lookup: {
+      from: "producers",
+      localField: "_id",
+      foreignField: "movies",
+      as: "producer_details"
+    }
+  },
+  { $match: { "producer_details.1": { $exists: true } } },
+  { $project: { title: 1, "producer_details.name": 1, _id: 0 } }
+])
+
+
+
+
+
+
+Slip 13 
+
+WebTech
+Create a useful web with the following information and structure using
+HTML5 tags like:<header> , <footer>, <nav>, <aside>, <section>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Useful Web Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header, footer {
+            background-color:skyblue;
+            color: white;
+            text-align: center;
+            
+        }
+        nav {
+            background-color:blue;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        section, aside {
+            padding: 20px;
+        }
+        aside {
+            background-color: #f4f4f4;
+            margin-top: 20px;
+        }
+        footer {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Welcome to Our Website</h1>
+</header>
+
+<nav>
+    <a href="#">Home</a>
+    <a href="#">About Us</a>
+    <a href="#">Services</a>
+    <a href="#">Contact</a>
+</nav>
+
+<section>
+    <h2>Main Content</h2>
+    <p>This is the Main Content </p>
+</section>
+
+<aside>
+    <h3>Additional Information</h3>
+    <p>This section can Additional Information</p>
+</aside>
+
+<footer>
+    <p>&copy; 2024 Useful Web Page. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
+
+
+MongoDB
+
+Question:
+
+Model the following Student Competition information as a document database. Consider Student competition information where the student can participate in many competitions.
+Assume appropriate attributes and collections as per the query requirements.
+Insert at least 10 documents in each collection.
+Answer the following Queries:
+a. Display the average number of students participating in each competition.
+b. Find the number of students for the programming competition.
+c. Display the names of the first three winners of each competition.
+d. Display students from class 'FY’ who participated in the 'E-Rangoli' Competition.
+Program:
+
+  
+ 
+# Start MongoDB   
+mongosh
+
+# Create and select the database
+use StudentCompetitionDB
+
+# Create and insert documents into 'competitions' collection (10 records)
+db.competitions.insertMany([
+  { _id: 1, name: "E-Rangoli", type: "Art", participants: [1, 2, 3, 4, 5] },
+  { _id: 2, name: "Programming", type: "Coding", participants: [2, 3, 6, 7] },
+  { _id: 3, name: "Quiz", type: "Knowledge", participants: [1, 4, 5, 6, 7] },
+  { _id: 4, name: "Dance", type: "Performance", participants: [8, 9, 10] },
+  { _id: 5, name: "E-Sports", type: "Gaming", participants: [3, 4, 6, 7, 8] },
+  { _id: 6, name: "Photography", type: "Art", participants: [1, 9, 10] },
+  { _id: 7, name: "Debate", type: "Speech", participants: [2, 4, 7, 8] },
+  { _id: 8, name: "Innovation", type: "Science", participants: [5, 6, 8, 10] },
+  { _id: 9, name: "Poetry", type: "Literature", participants: [1, 2, 3, 5] },
+  { _id: 10, name: "Sports", type: "Physical", participants: [2, 3, 4, 6, 9] }
+])
+
+# Create and insert documents into 'students' collection (10 records)
+db.students.insertMany([
+  { _id: 1, name: "John", class: "FY", competitions: [1, 3, 6, 9] },
+  { _id: 2, name: "Alice", class: "SY", competitions: [1, 2, 4, 7] },
+  { _id: 3, name: "Bob", class: "FY", competitions: [2, 3, 5, 9, 10] },
+  { _id: 4, name: "Charlie", class: "TY", competitions: [1, 3, 5, 7] },
+  { _id: 5, name: "David", class: "SY", competitions: [3, 5, 6, 9] },
+  { _id: 6, name: "Eva", class: "FY", competitions: [2, 5, 7, 8] },
+  { _id: 7, name: "Frank", class: "TY", competitions: [2, 3, 7, 10] },
+  { _id: 8, name: "Grace", class: "FY", competitions: [4, 5, 7] },
+  { _id: 9, name: "Hannah", class: "SY", competitions: [4, 6, 10] },
+  { _id: 10, name: "Ivy", class: "TY", competitions: [3, 5, 8] }
+])
+
+# a. Display the average number of students participating in each competition
+db.competitions.aggregate([
+  { $project: { name: 1, participantCount: { $size: "$participants" } } },
+  { $group: { _id: null, averageParticipants: { $avg: "$participantCount" } } }
+])
+
+# b. Find the number of students for the programming competition
+db.competitions.aggregate([
+  { $match: { name: "Programming" } },
+  { $project: { _id: 0, participantsCount: { $size: "$participants" } } }
+])
+
+# c. Display the names of the first three winners of each competition (simulated order of winners)
+db.competitions.aggregate([
+  { $unwind: "$participants" },
+  { $lookup: {
+      from: "students",
+      localField: "participants",
+      foreignField: "_id",
+      as: "studentDetails"
+    }
+  },
+  { $group: { _id: "$name", winners: { $push: "$studentDetails.name" } } },
+  { $project: { name: "$_id", winners: { $slice: ["$winners", 3] }, _id: 0 } }
+])
+
+# d. Display students from class 'FY' who participated in 'E-Rangoli' Competition
+db.students.aggregate([
+  { $match: { class: "FY" } },
+  { $lookup: {
+      from: "competitions",
+      localField: "competitions",
+      foreignField: "_id",
+      as: "competitionDetails"
+    }
+  },
+  { $unwind: "$competitionDetails" },
+  { $match: { "competitionDetails.name": "E-Rangoli" } },
+  { $project: { name: 1, class: 1, _id: 0 } }
+])
+
+
+
+
+
+
+
+
+Slip 14 
+
+WebTech
+Design an HTML form to take the information of a customer for booking a
+travel plan consisting of fields such as name, address, contact no., gender,
+preferred season(Checkboxes), location type(to be selected from a list) etc.
+You should provide button to submit as well as reset the form contents
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Travel Booking Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            
+        }
+        
+        form {
+            width: 300px;
+            margin: auto;
+	    font-family: Arial, sans-serif; 
+        align-items: center;
+        }
+
+button {
+            background-color: blue;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div>
+    
+
+    <form>
+        <h1>Customer Travel Booking Form</h1>
+        <h4>Name:</h4>
+        <input type="text" name="name" required><br>
+
+        <h4>Address:</h4>
+        <input type="text" name="address" required><br>
+
+        <h4>Contact No:</h4>
+        <input type="tel" name="contact" required><br>
+
+        <h4>Gender:</h4>
+        <input type="radio" name="gender" value="Male" required> Male
+        <input type="radio" name="gender" value="Female" required> Female<br>
+
+        <h4>Preferred Season:</h4>
+        <input type="checkbox" name="season" value="Summer"> Summer
+        <input type="checkbox" name="season" value="Winter"> Winter
+        <input type="checkbox" name="season" value="Rainy"> Rainy<br>
+
+        <h4>Location Type:</h4>
+        <select name="location">
+            <option value="Beach">Beach</option>
+            <option value="Mountain">Mountain</option>
+            <option value="City">City</option>
+        </select><br><br>
+
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+    </form>
+</div>
+</body>
+</html>
+
+
+
+MongoDB
+
+Model the following system as a graph model, and answer the queries using Cypher.
+Government provides various scholarships for students. A student applies for scholarships. A student can get benefits from more than one scholarship if they satisfy the criteria. A student can recommend scholarships to their friends or family members.
+
+
+# Start MongoDB   
+mongosh
+
+# Create and select the database
+use ScholarshipDatabase
+
+# Create and insert documents into 'students' collection (5 records)
+db.students.insertMany([
+  { _id: 1, name: "Ravi Kumar", category: "OBC", income: 50000, year_of_application: "2020-2021", scholarships: [1, 2] },
+  { _id: 2, name: "Priya Sharma", category: "General", income: 40000, year_of_application: "2020-2021", scholarships: [2] },
+  { _id: 3, name: "Deepak Singh", category: "OBC", income: 35000, year_of_application: "2020-2021", scholarships: [1, 3] },
+  { _id: 4, name: "Aarti Gupta", category: "SC", income: 45000, year_of_application: "2020-2021", scholarships: [1] },
+  { _id: 5, name: "Shyam Verma", category: "OBC", income: 60000, year_of_application: "2020-2021", scholarships: [2, 3] }
+])
+
+# Create and insert documents into 'scholarships' collection (3 records)
+db.scholarships.insertMany([
+  { _id: 1, name: "OBC Merit Scholarship", category: "OBC", income_limit: 50000, academic_year: "2020-2021" },
+  { _id: 2, name: "General Education Scholarship", category: "General", income_limit: 40000, academic_year: "2020-2021" },
+  { _id: 3, name: "SC Financial Assistance", category: "SC", income_limit: 60000, academic_year: "2020-2021" }
+])
+
+# Create and insert documents into 'recommendations' collection (3 records)
+db.recommendations.insertMany([
+  { _id: 1, student_id: 1, recommended_student_id: 2, referral_name: "Shyam Verma" },
+  { _id: 2, student_id: 3, recommended_student_id: 4, referral_name: "Ravi Kumar" },
+  { _id: 3, student_id: 5, recommended_student_id: 1, referral_name: "Deepak Singh" }
+])
+
+# a. List the names of scholarships for OBC category
+db.scholarships.find({ category: "OBC" }, { name: 1, _id: 0 })
+
+# b. Count the number of students who are benefitted by a particular scholarship in year 2020-2021
+db.students.aggregate([
+  { $unwind: "$scholarships" },
+  { $match: { "year_of_application": "2020-2021", "scholarships": 1 } },
+  { $count: "benefited_students" }
+])
+
+# c. Update the income limit for a scholarship
+db.scholarships.updateOne(
+  { name: "OBC Merit Scholarship" },
+  { $set: { income_limit: 55000 } }
+)
+
+# d. List the most popular scholarship (one with the most students applying for it)
+db.students.aggregate([
+  { $unwind: "$scholarships" },
+  { $group: { _id: "$scholarships", student_count: { $sum: 1 } } },
+  { $sort: { student_count: -1 } },
+  { $limit: 1 },
+  { $lookup: {
+      from: "scholarships",
+      localField: "_id",
+      foreignField: "_id",
+      as: "scholarship_details"
+    }
+  },
+  { $project: { "scholarship_details.name": 1, student_count: 1, _id: 0 } }
+])
+
+
+
+
+Slip 15 
+
+WebTech
+
+ Create HTML web-page using Bootstrap as shown below
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Registration Form</title>
+  <link href="bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: lightgray;
+    }
+    .form-container {
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 5px;
+    }
+    .btn-submit {
+      background-color: orange;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="form-container">
+      <h2 class="text-center mb-4">Registration Form</h2>
+      <form>
+        <div class="mb-3">
+          <h4>First Name</h4>
+          <input type="text" class="form-control" placeholder="First Name">
+        </div>
+        <div class="mb-3">
+          <h4>Last Name</h4>
+          <input type="text" class="form-control" placeholder="Last Name">
+        </div>
+        <div class="mb-3">
+          <h4>Department / Office</h4>
+          <select class="form-select">
+            <option selected>Select your Department/Office</option>
+            <option value="1">HR</option>
+            <option value="2">IT</option>
+            <option value="3">Finance</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <h4>Username</h4>
+          <input type="text" class="form-control" placeholder="Username">
+        </div>
+        <div class="mb-3">
+          <h4>Password</h4>
+          <input type="password" class="form-control" placeholder="Password">
+        </div>
+        <div class="mb-3">
+          <h4>Confirm Password</h4>
+          <input type="password" class="form-control" placeholder="Confirm Password">
+        </div>
+        <div class="mb-3">
+          <h4>E-mail</h4>
+          <input type="email" class="form-control" placeholder="E-mail Address">
+        </div>
+        <div class="mb-3">
+          <h4>Contact No.</h4>
+          <input type="text" class="form-control" placeholder="Contact No.">
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
+
+
+
+MongoDB
+
+ Model the following movie system as a Graph database.
+Consider a information about of movie and actors. One movie can have
+more than one actor
+1. Identify the labels and relationships, along with their properties, and
+draw a high-level Graph model. [3]
+2. Create nodes and relationships, along with their properties, and
+visualize your actual Graph model. [3]
+3. Answer the Queries:
+a. Find movie which made highest business. [3]
+b. Display details of movie along with actors. [3]
+c. List all the movie of “Shahrukh Khan”. [4]
+d. Display all movie having more than 2 awards received
+ [4]
+
+
+
+# Start mongosh (MongoDB   )
+mongosh
+
+# Create and use the database
+use movieDB
+
+# Insert the movie and actor data
+db.Movies.insertMany([
+  { _id: 1, title: "Movie A", business: 1000000, awards: 3 },
+  { _id: 2, title: "Movie B", business: 1500000, awards: 2 },
+  { _id: 3, title: "Movie C", business: 500000, awards: 4 }
+])
+
+db.Actors.insertMany([
+  { _id: 1, name: "Shahrukh Khan" },
+  { _id: 2, name: "Aamir Khan" },
+  { _id: 3, name: "Katrina Kaif" }
+])
+
+# Create relationships between movies and actors
+db.Movies.updateOne(
+  { _id: 1 },
+  { $set: { actors: [1, 2] } }
+)
+db.Movies.updateOne(
+  { _id: 2 },
+  { $set: { actors: [1, 3] } }
+)
+db.Movies.updateOne(
+  { _id: 3 },
+  { $set: { actors: [2, 3] } }
+)
+
+# Run the queries as needed
+db.Movies.find().sort({ business: -1 }).limit(1)
+
+db.Movies.aggregate([
+  {
+    $lookup: {
+      from: "Actors",
+      localField: "actors",
+      foreignField: "_id",
+      as: "actor_details"
+    }
+  }
+])
+
+db.Movies.find({ actors: 1 })
+
+db.Movies.find({ awards: { $gt: 2 } })
+
+
+
+Slip 16 
+
+WebTech
+Create Contact Form on Bootstrap 
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Contact Form</title>
+  <!-- Link to local Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: white;
+    }
+    .contact-form {
+      margin: 50px auto;
+      max-width: 800px;
+      background: white;
+      border-radius: 8px;
+      color: white;
+    }
+    .contact-form .form-left {
+      background-color: orange;
+      padding: 30px;
+      color: black;
+      border-radius: 8px 0 0 8px;
+    }
+    .contact-form .form-right {
+      padding: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="contact-form row shadow">
+      <div class="col-md-4 form-left">
+        <h3>Contact Us</h3>
+        <p>We would love to hear from you!</p>
+      </div>
+      <div class="col-md-8 form-right">
+        <form>
+          <div class="mb-3">
+            <label for="firstName" class="form-label">First Name:</label>
+            <input type="text" class="form-control" id="firstName" placeholder="Enter First Name">
+          </div>
+          <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name:</label>
+            <input type="text" class="form-control" id="lastName" placeholder="Enter Last Name">
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter email">
+          </div>
+          <div class="mb-3">
+            <label for="comment" class="form-label">Comment:</label>
+            <textarea class="form-control" id="comment" rows="4" placeholder="Enter your comment"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Link to local Bootstrap JS -->
+  <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+
+MongoDB
+
+Model the following food service industry information as a graph
+model, and answer the following queries using Cypher.
+Consider food service industries like ZOMATO, Swiggy around us.
+Popular restaurants are connected to these industries to increase sell. A
+person order food through this industry and get offers. A person give
+rate(1-5 stars) to company its facility/facilities. and can recommend this
+to his/her friends.
+4. Identify the labels and relationships, along with their properties, and
+draw a high-level Graph model. [3]
+5. Create nodes and relationships, along with their properties, and
+visualize your actual Graph model. [3]
+6. Answer the Queries.
+a. Count no. of customers who place order on “1/1/2023” [3]
+b. List the names of customers whose name starts with S and
+place order using Swiggy [3]
+c. List the names of hotels with high rating (>=4).[4]
+d. List the most recommended hotels in……. area. [4]
+
+
+
+# Step 1: Open MongoDB    using mongosh
+mongosh
+
+# Step 2: Create a database for the food service industry graph
+use food_service_db
+
+# Step 3: Create collections and insert data for customers, restaurants, and orders
+db.customers.insertMany([
+  { _id: 1, name: "John Doe", city: "Mumbai" },
+  { _id: 2, name: "Sara Lee", city: "Delhi" },
+  { _id: 3, name: "Sam Patel", city: "Bangalore" },
+  { _id: 4, name: "Sita Sharma", city: "Chennai" }
+])
+
+db.restaurants.insertMany([
+  { _id: 1, name: "The Royal Dine", rating: 4.5, area: "Mumbai" },
+  { _id: 2, name: "Foodie Delight", rating: 3.8, area: "Delhi" },
+  { _id: 3, name: "Tasty Treats", rating: 4.2, area: "Bangalore" },
+  { _id: 4, name: "Spicy Street", rating: 5, area: "Chennai" }
+])
+
+db.orders.insertMany([
+  { _id: 1, customerId: 1, restaurantId: 1, date: ISODate("2023-01-01T10:00:00Z"), orderType: "Swiggy", rating: 5, recommendation: true },
+  { _id: 2, customerId: 2, restaurantId: 2, date: ISODate("2023-01-02T11:30:00Z"), orderType: "Zomato", rating: 3, recommendation: false },
+  { _id: 3, customerId: 3, restaurantId: 3, date: ISODate("2023-01-01T09:15:00Z"), orderType: "Swiggy", rating: 4, recommendation: true },
+  { _id: 4, customerId: 4, restaurantId: 4, date: ISODate("2023-01-03T12:00:00Z"), orderType: "Zomato", rating: 5, recommendation: true }
+])
+
+# Step 4: Write the queries to fetch the required results
+
+# a. Count number of customers who placed orders on "1/1/2023"
+db.orders.aggregate([
+  { $match: { date: ISODate("2023-01-01T00:00:00Z") } },
+  { $group: { _id: "$customerId" } },
+  { $count: "totalCustomers" }
+])
+
+# b. List the names of customers whose name starts with "S" and placed orders using "Swiggy"
+db.orders.aggregate([
+  { $match: { orderType: "Swiggy" } },
+  { $lookup: {
+    from: "customers",
+    localField: "customerId",
+    foreignField: "_id",
+    as: "customer_info"
+  }},
+  { $unwind: "$customer_info" },
+  { $match: { "customer_info.name": { $regex: "^S" } } },
+  { $project: { "customer_info.name": 1 } }
+])
+
+# c. List the names of hotels with a high rating (>= 4)
+db.restaurants.aggregate([
+  { $match: { rating: { $gte: 4 } } },
+  { $project: { name: 1, rating: 1 } }
+])
+
+# d. List the most recommended hotels in a given area, for example, "Mumbai"
+db.orders.aggregate([
+  { $match: { recommendation: true } },
+  { $lookup: {
+    from: "restaurants",
+    localField: "restaurantId",
+    foreignField: "_id",
+    as: "restaurant_info"
+  }},
+  { $unwind: "$restaurant_info" },
+  { $match: { "restaurant_info.area": "Mumbai" } },
+  { $group: { _id: "$restaurant_info.name", recommendationCount: { $sum: 1 } } },
+  { $sort: { recommendationCount: -1 } }
+])
+
+# Step 5: Exit MongoDB   
+exit
+
+
+
+
+
+
+
+Slip 17 
+
+WebTech
+Design HTML 5 Page Using CSS which display the following Box ( use Box Model Property in
+ CSS)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Model Example</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .outer {
+            width: 90%;
+            max-width: 300px;
+            background-color: orange;
+            border: 5px solid black;
+            padding: 35px;
+            box-sizing: border-box;
+        }
+
+        .inner {
+            background-color: yellow;
+            border: 5px solid black;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .text-container {
+            margin: 10px 0;
+            padding: 5px;
+            border: 3px solid black;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="outer">
+        <div class="inner">
+            <div class="text-container">
+                M.Sc (Computer Sci)
+            </div>
+            <div class="text-container">
+                Academic Year<br>2024-25
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+MongoDB
+
+Model the following Books and Publisher information as a graph model,
+and answer the following queries using Cypher.
+Author wrote various types of books which is published by publishers.
+A reader reads a books according to his linking and can
+recommend/provide review for it.
+1. Identify the labels and relationships, along with their properties, and
+draw a high-level Graph model. [3]
+2. Create nodes and relationships, along with their properties, and
+visualize your actual Graph model.[3]
+3. Answer the Queries
+a. List the names of authors who wrote “Comics”. [3]
+b. Count no. of readers of _____book published by
+ “Sage”. [3]
+c. List all the publisher whose name starts with “N” [4]
+d. List the names of people who have given a rating of (>=3) for
+______ book [4]
+
+
+
+
+# Step 1: Open MongoDB    using mongosh
+mongosh
+
+# Step 2: Create a database for the books and publishers graph
+use books_publisher_db
+
+# Step 3: Create collections and insert data for authors, books, publishers, and readers
+db.authors.insertMany([
+  { _id: 1, name: "John Smith", genre: "Comics" },
+  { _id: 2, name: "Jane Doe", genre: "Fiction" },
+  { _id: 3, name: "Alice Johnson", genre: "Science" }
+])
+
+db.publishers.insertMany([
+  { _id: 1, name: "Sage" },
+  { _id: 2, name: "Penguin" },
+  { _id: 3, name: "Nobel" }
+])
+
+db.books.insertMany([
+  { _id: 1, title: "Comic Adventures", authorId: 1, publisherId: 1, genre: "Comics" },
+  { _id: 2, title: "Science Explained", authorId: 3, publisherId: 2, genre: "Science" },
+  { _id: 3, title: "Fictional World", authorId: 2, publisherId: 3, genre: "Fiction" }
+])
+
+db.readers.insertMany([
+  { _id: 1, name: "Mike Lee", bookId: 1, rating: 4, review: "Loved the comic!" },
+  { _id: 2, name: "Emma Davis", bookId: 1, rating: 5, review: "Great story!" },
+  { _id: 3, name: "Lucas Brown", bookId: 2, rating: 3, review: "Interesting read" },
+  { _id: 4, name: "Olivia White", bookId: 3, rating: 2, review: "Not my type" }
+])
+
+# Step 4: Write the queries to fetch the required results
+
+# a. List the names of authors who wrote “Comics”
+db.books.aggregate([
+  { $match: { genre: "Comics" } },
+  { $lookup: {
+    from: "authors",
+    localField: "authorId",
+    foreignField: "_id",
+    as: "author_info"
+  }},
+  { $unwind: "$author_info" },
+  { $project: { "author_info.name": 1 } }
+])
+
+# b. Count number of readers who read a specific book published by "Sage"
+db.books.aggregate([
+  { $match: { publisherId: { $in: [db.publishers.findOne({ name: "Sage" })._id] } } },
+  { $lookup: {
+    from: "readers",
+    localField: "_id",
+    foreignField: "bookId",
+    as: "readers_info"
+  }},
+  { $project: { "readers_info": 1 } },
+  { $count: "totalReaders" }
+])
+
+# c. List all publishers whose name starts with “N”
+db.publishers.aggregate([
+  { $match: { name: { $regex: "^N", $options: "i" } } },
+  { $project: { name: 1 } }
+])
+
+# d. List the names of people who have given a rating of (>=3) for a specific book, for example, "Comic Adventures"
+db.books.aggregate([
+  { $match: { title: "Comic Adventures" } },
+  { $lookup: {
+    from: "readers",
+    localField: "_id",
+    foreignField: "bookId",
+    as: "reader_info"
+  }},
+  { $unwind: "$reader_info" },
+  { $match: { "reader_info.rating": { $gte: 3 } } },
+  { $project: { "reader_info.name": 1 } }
+])
+
+# Step 5: Exit MongoDB   
+exit
+
+
+
+
+
+
+Slip 18 
+
+WebTech
+Create a web page, place an image in center and apply 2d transformation on
+ it. (rotation, scaling, translation)
+<!DOCTYPE html>
+<html>
+<head>
+    <title>2D Transformations</title>
+    <style>
+        body {
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        img {
+            width: 200px;
+            transition: all 1s;
+        }
+        img:hover {
+            transform: rotate(45deg) scale(1.5) translate(20px, 20px);
+        }
+    </style>
+</head>
+<body>
+    <h1>2D Transformations on Image</h1>
+    <img src="image.jpg" alt="Sample Image">
+</body>
+</html>
+
+
+MongoDB
+
+Model the following Doctor’s information system as a graph model, and
+answer the following queries using Cypher.
+Consider the doctors in and around Pune. Each Doctor is specialized in
+some stream like Pediatric, Gynaec, Heart Specialist, Cancer Specialist,
+ENT, etc. A doctor may be a visiting doctor across many hospitals or he
+may own a clinic. A person can provide a review/can recommend a
+doctor.
+1. Identify the labels and relationships, along with their properties, and
+draw a high-level Graph model. [3]
+2. Create nodes and relationships, along with their properties, and
+visualize your actual Graph model. [3]
+3. Answer the Queries
+a. List the Orthopedic doctors in ……. Area. [3]
+b. List the doctors who has specialization in ____ [3]
+c. List the most recommended Pediatrics in Seren Medows. [4]
+d. List all the who visits more than 2 hospitals [4]
+
+
+
+# Step 1: Open MongoDB    using mongosh
+mongosh
+
+# Step 2: Create a database for the Doctor's information system graph model
+use doctor_system_db
+
+# Step 3: Create collections and insert data for doctors, hospitals, clinics, and reviews
+db.doctors.insertMany([
+  { _id: 1, name: "Dr. John Doe", specialization: "Orthopedic", clinic: "Ortho Clinic", hospital: ["MedCity", "Healing Touch"] },
+  { _id: 2, name: "Dr. Jane Smith", specialization: "Pediatrics", clinic: "Pediacare", hospital: ["Happy Health", "Sunshine Clinic"] },
+  { _id: 3, name: "Dr. Alice Brown", specialization: "Gynaec", clinic: "Women’s Care", hospital: ["MedCity"] },
+  { _id: 4, name: "Dr. Mark Lee", specialization: "Cardiology", clinic: "Heartbeat", hospital: ["Heart Center", "Healing Touch"] },
+  { _id: 5, name: "Dr. Eva Davis", specialization: "Pediatrics", clinic: "Pediacare", hospital: ["Happy Health", "Seren Medows"] }
+])
+
+db.hospitals.insertMany([
+  { _id: 1, name: "MedCity", location: "Pune" },
+  { _id: 2, name: "Happy Health", location: "Pune" },
+  { _id: 3, name: "Healing Touch", location: "Pune" },
+  { _id: 4, name: "Heart Center", location: "Pune" },
+  { _id: 5, name: "Sunshine Clinic", location: "Pune" },
+  { _id: 6, name: "Seren Medows", location: "Pune" }
+])
+
+db.reviews.insertMany([
+  { _id: 1, doctorId: 1, review: "Great orthopedic surgeon!", rating: 5, recommender: "Mike Lee" },
+  { _id: 2, doctorId: 2, review: "Very caring pediatrician!", rating: 5, recommender: "Emma White" },
+  { _id: 3, doctorId: 2, review: "Excellent care for children.", rating: 4, recommender: "Liam Brown" },
+  { _id: 4, doctorId: 3, review: "Highly professional Gynaec!", rating: 4, recommender: "Olivia Green" },
+  { _id: 5, doctorId: 5, review: "Best pediatrician in the area.", rating: 5, recommender: "Sophia Harris" }
+])
+
+# Step 4: Write the queries to fetch the required results
+
+# a. List the Orthopedic doctors in the given area (example: Pune)
+db.doctors.aggregate([
+  { $match: { specialization: "Orthopedic" } },
+  { $lookup: {
+    from: "hospitals",
+    localField: "hospital",
+    foreignField: "_id",
+    as: "hospital_info"
+  }},
+  { $unwind: "$hospital_info" },
+  { $match: { "hospital_info.location": "Pune" } },
+  { $project: { name: 1, specialization: 1 } }
+])
+
+# b. List the doctors who specialize in a given stream, for example, Pediatrics
+db.doctors.aggregate([
+  { $match: { specialization: "Pediatrics" } },
+  { $project: { name: 1, specialization: 1 } }
+])
+
+# c. List the most recommended Pediatrics in Seren Medows
+db.doctors.aggregate([
+  { $match: { specialization: "Pediatrics" } },
+  { $lookup: {
+    from: "reviews",
+    localField: "_id",
+    foreignField: "doctorId",
+    as: "review_info"
+  }},
+  { $unwind: "$review_info" },
+  { $match: { "review_info.recommender": "Seren Medows" } },
+  { $sort: { "review_info.rating": -1 } },
+  { $limit: 1 },
+  { $project: { name: 1, review_info: 1 } }
+])
+
+# d. List all doctors who visit more than 2 hospitals
+db.doctors.aggregate([
+  { $match: { $expr: { $gt: [{ $size: "$hospital" }, 2] } } },
+  { $project: { name: 1, hospital: 1 } }
+])
+
+# Step 5: Exit MongoDB   
+exit
+
+
+
+
+
+Slip 19 
+
+WebTech
+Create a web page in which show a button with a text “start download” ,
+when click in start download a progress bar must be initialized with value 0
+then increase by 10 in each second, change the color of progress bar after
+every three seconds..
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Progress Bar with Color Change</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .progress-container {
+            width: 80%;
+            height: 30px;
+            background-color: lightgray;
+            margin: 20px auto;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: blue;
+            transition: background-color 0.5s;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkgreen;
+        }
+    </style>
+</head>
+<body>
+    <h1>Start Download</h1>
+    <button onclick="startDownload()">Start Download</button>
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <script>
+        function startDownload() {
+            let progressBar = document.getElementById("progressBar");
+            let width = 0;
+            let colorIndex = 0;
+            const colors = ["blue", "red", "green", "orange", "purple"];
+
+            let interval = setInterval(function() {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    alert("Download completed");
+                } else {
+                    width += 10; // Increment by 10%
+                    progressBar.style.width = width + "%";
+
+                    if (Math.floor(width / 30) > colorIndex) {
+                        colorIndex++;
+                        progressBar.style.backgroundColor = colors[colorIndex % colors.length];
+                    }
+                }
+            }, 1000); // 1 second interval
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+MongoDB
+
+Model the following Laptop manufacturing information system as a
+graph model, and answer the following queries using Cypher.
+Consider an Laptop manufacturing industries which produces different
+types of laptops. A customer can buya laptop, recommend or rate a the
+product.
+1. Identify the labels and relationships, along with their properties, and
+draw a high-level Graph model. [3]
+2. Create nodes and relationships, along with their properties, and
+visualize your actual Graph model.[3]
+3. Answer the Queries
+a. List the characteristics of…….. laptop. [3]
+b. List the name of customers who bought a “DELL” company
+laptop [3]
+c. List the customers who purchase a device on “26/01/2023”[4]
+d. List the most recommended device.[4]
+
+
+
+
+# Step 1: Open MongoDB    using mongosh
+mongosh
+
+# Step 2: Create a database for the Laptop manufacturing information system graph model
+use laptop_manufacturing_db
+
+# Step 3: Create collections and insert data for laptops, customers, and reviews
+db.laptops.insertMany([
+  { _id: 1, brand: "DELL", model: "Inspiron 15", characteristics: ["Intel i5", "8GB RAM", "512GB SSD"] },
+  { _id: 2, brand: "HP", model: "Pavilion 14", characteristics: ["Intel i7", "16GB RAM", "1TB SSD"] },
+  { _id: 3, brand: "Lenovo", model: "ThinkPad X1", characteristics: ["Intel i9", "32GB RAM", "1TB SSD"] }
+])
+
+db.customers.insertMany([
+  { _id: 1, name: "Alice", purchased_laptops: [1, 2], review: { laptopId: 1, rating: 5, recommendation: "Yes" }, purchase_date: "2023-01-25" },
+  { _id: 2, name: "Bob", purchased_laptops: [1], review: { laptopId: 1, rating: 4, recommendation: "No" }, purchase_date: "2023-01-26" },
+  { _id: 3, name: "Charlie", purchased_laptops: [3], review: { laptopId: 3, rating: 5, recommendation: "Yes" }, purchase_date: "2023-01-20" }
+])
+
+# Step 4: Write the queries to fetch the required results
+
+# a. List the characteristics of a given laptop, for example, "DELL Inspiron 15"
+db.laptops.aggregate([
+  { $match: { brand: "DELL", model: "Inspiron 15" } },
+  { $project: { characteristics: 1 } }
+])
+
+# b. List the name of customers who bought a "DELL" laptop
+db.customers.aggregate([
+  { $match: { "purchased_laptops": 1 } },
+  { $lookup: {
+    from: "laptops",
+    localField: "purchased_laptops",
+    foreignField: "_id",
+    as: "laptop_info"
+  }},
+  { $unwind: "$laptop_info" },
+  { $match: { "laptop_info.brand": "DELL" } },
+  { $project: { name: 1 } }
+])
+
+# c. List the customers who purchased a device on "26/01/2023"
+db.customers.aggregate([
+  { $match: { purchase_date: "2023-01-26" } },
+  { $project: { name: 1 } }
+])
+
+# d. List the most recommended device (laptop with highest recommendation rating)
+db.laptops.aggregate([
+  { $lookup: {
+    from: "customers",
+    localField: "_id",
+    foreignField: "purchased_laptops",
+    as: "customer_reviews"
+  }},
+  { $unwind: "$customer_reviews" },
+  { $match: { "customer_reviews.review.recommendation": "Yes" } },
+  { $group: { _id: "$model", recommendation_count: { $sum: 1 } } },
+  { $sort: { recommendation_count: -1 } },
+  { $limit: 1 },
+  { $project: { _id: 0, model: "$_id", recommendation_count: 1 } }
+])
+
+# Step 5: Exit MongoDB   
+exit
+
+
+
+ Slip 20
+
+WebTech
+Create a web page , show a button with a text “start download” , when click in
+start download a progress bar must be initialized with value 0 then increase by
+5 in each second then at the end of downloading process alert the message
+“Download completed” 
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Download Progress Bar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .progress-container {
+            width: 80%;
+            height: 30px;
+            background-color: lightgray;
+            margin: 20px auto;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: blue;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkgreen;
+        }
+    </style>
+</head>
+<body>
+    <h1>Start Download</h1>
+    <button onclick="startDownload()">Start Download</button>
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <script>
+        function startDownload() {
+            let progressBar = document.getElementById("progressBar");
+            let width = 0;
+            let interval = setInterval(function() {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    alert("Download completed");
+                } else {
+                    width += 5; // Increment by 5%
+                    progressBar.style.width = width + "%";
+                }
+            }, 1000); // 1 second interval
+        }
+    </script>
+</body>
+</html>
+
+
+MongoDB
+
+Model the following nursery management information as a graph model,
+and answer the following queries using Cypher.
+Nursery content various types of plants, fertilizers and required products.
+Customer visit the nursery or use an app , purchase the plants and necessary
+products also rate and recommend the app
+1. Identify the labels and relationships, along with their properties, and
+draw a high-level Graph model. [3]
+2. Create nodes and relationships, along with their properties, and
+visualize your actual Graph model. [3]
+3. Answer the following queries using Cypher:
+a. List the types of plants from your graph model [3]
+b. List the popular flowering plants. [3]
+c. List the names of plants sold plant where qty>500 in last 2 days [4]
+d. List the names of suppliers in decreasing order who supplies
+“Creepers”. [4]
+
+
+# Step 1: Open MongoDB    using mongosh
+mongosh
+
+# Step 2: Create a database for the nursery management system
+use nursery_management_db
+
+# Step 3: Create collections and insert data for plants, fertilizers, customers, suppliers, and purchases
+
+db.plants.insertMany([
+  { _id: 1, name: "Rose", type: "Flowering", category: "Outdoor", qty: 100, rating: 4.5 },
+  { _id: 2, name: "Tulip", type: "Flowering", category: "Indoor", qty: 200, rating: 4.7 },
+  { _id: 3, name: "Creeper", type: "Climbing", category: "Outdoor", qty: 500, rating: 4.3 },
+  { _id: 4, name: "Fern", type: "Indoor", category: "Indoor", qty: 150, rating: 4.6 },
+  { _id: 5, name: "Sunflower", type: "Flowering", category: "Outdoor", qty: 300, rating: 4.8 }
+])
+
+db.customers.insertMany([
+  { _id: 1, name: "Alice", purchased_plants: [1, 2], app_rating: 5, app_recommendation: "Yes", purchase_date: "2023-10-25" },
+  { _id: 2, name: "Bob", purchased_plants: [3, 4], app_rating: 4, app_recommendation: "No", purchase_date: "2023-10-26" }
+])
+
+db.suppliers.insertMany([
+  { _id: 1, name: "Greenhouse Suppliers", product_supplied: "Creepers", rating: 4.6 },
+  { _id: 2, name: "Blooming Plants", product_supplied: "Creepers", rating: 4.8 }
+])
+
+# Step 4: Write the Cypher queries to fetch the required results
+
+# a. List the types of plants from the graph model
+db.plants.aggregate([
+  { $project: { type: 1 } },
+  { $group: { _id: "$type" } }
+])
+
+# b. List the popular flowering plants
+db.plants.aggregate([
+  { $match: { type: "Flowering" } },
+  { $sort: { rating: -1 } },
+  { $project: { name: 1, rating: 1 } }
+])
+
+# c. List the names of plants sold where qty > 500 in the last 2 days
+db.plants.aggregate([
+  { $match: { qty: { $gt: 500 } } },
+  { $project: { name: 1 } }
+])
+
+# d. List the names of suppliers in decreasing order who supply "Creepers"
+db.suppliers.aggregate([
+  { $match: { product_supplied: "Creepers" } },
+  { $sort: { rating: -1 } },
+  { $project: { name: 1 } }
+])
+
+# Step 5: Exit MongoDB   
+exit
+
+
+
+
+
+
+ Slip 21
+
+WebTech
+ Write a css3 script for the student registration form with appropriate message
+ display also high light compulsory fields in a different color
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: lightgray;
+        }
+        form {
+            width: 300px;
+            margin: 20px auto;
+            padding: 15px;
+            border: 1px solid black;
+            background-color: white;
+        }
+        h4 {
+            text-align: left;
+            margin-bottom: 5px;
+            color: black;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+            border: 1px solid gray;
+            border-radius: 3px;
+        }
+        .compulsory {
+            border-color: red;
+            background-color: lightpink;
+        }
+        .message {
+            color: red;
+            font-size: 12px;
+            text-align: left;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: blue;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        button:hover {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Student Registration Form</h1>
+    <form>
+        <h4>Full Name</h4>
+        <input type="text" class="compulsory" placeholder="Enter your name">
+        <div class="message">* This field is required</div>
+
+        <h4>Email</h4>
+        <input type="email" placeholder="Enter your email">
+
+        <h4>Date of Birth</h4>
+        <input type="date" class="compulsory">
+        <div class="message">* This field is required</div>
+
+        <h4>Gender</h4>
+        <select>
+            <option>Select</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+        </select>
+
+        <h4>Course</h4>
+        <input type="text" placeholder="Enter course name">
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
+
+
+
+
+MongoDB
+
+Model the following Medical information as a graph model, and answerthe
+following queries using Cypher.
+There are various brands of medicine like Dr. Reddy, Cipla, SunPharma etc.
+Their uses vary across different states in India. The uses of medicine is
+measuredas %, with a high use defined as >=90%, Medium Use between 50
+to 90%, and Low Use<50%. Each medicine manufactures various types of
+medicine products like Tablet, Syrup, and Powder etc.
+1. Identify the labels and relationships, along with their properties, and drawa
+high-level Graph model. [3]
+2. Create nodes and relationships, along with their properties, and visualize
+your actual Graph model. [3]
+3. Answer the following queries using Cypher:
+a. List the names of different medicines considered in your graph [3]
+b. List the medicine that are highly Used in Rajasthan. [3]
+c. List the highly used tablet in Gujarat. [4]
+d. List the medicine names manufacturing “Powder” [4]
+
+# Step 1: Open MongoDB    using mongosh
+mongosh
+
+# Step 2: Create a database for the medical information system
+use medical_information_db
+
+# Step 3: Create collections for medicines, states, and types of medicines (Tablet, Syrup, Powder, etc.)
+db.medicines.insertMany([
+  { _id: 1, name: "Paracetamol", brand: "Dr. Reddy", type: "Tablet", state: "Rajasthan", use_percentage: 95 },
+  { _id: 2, name: "Ibuprofen", brand: "Cipla", type: "Syrup", state: "Gujarat", use_percentage: 85 },
+  { _id: 3, name: "Aspirin", brand: "SunPharma", type: "Powder", state: "Rajasthan", use_percentage: 92 },
+  { _id: 4, name: "Cetirizine", brand: "Cipla", type: "Tablet", state: "Gujarat", use_percentage: 70 },
+  { _id: 5, name: "Amoxicillin", brand: "Dr. Reddy", type: "Syrup", state: "Maharashtra", use_percentage: 60 },
+  { _id: 6, name: "Metformin", brand: "SunPharma", type: "Tablet", state: "Rajasthan", use_percentage: 99 }
+])
+
+# Step 4: Write the Cypher queries to fetch the required results
+
+# a. List the names of different medicines considered in the graph
+db.medicines.aggregate([
+  { $project: { name: 1 } },
+  { $group: { _id: "$name" } }
+])
+
+# b. List the medicine that are highly used in Rajasthan (use_percentage >= 90%)
+db.medicines.aggregate([
+  { $match: { state: "Rajasthan", use_percentage: { $gte: 90 } } },
+  { $project: { name: 1, use_percentage: 1 } }
+])
+
+# c. List the highly used tablet in Gujarat (use_percentage >= 90%)
+db.medicines.aggregate([
+  { $match: { state: "Gujarat", type: "Tablet", use_percentage: { $gte: 90 } } },
+  { $project: { name: 1, use_percentage: 1 } }
+])
+
+# d. List the medicine names manufacturing "Powder"
+db.medicines.aggregate([
+  { $match: { type: "Powder" } },
+  { $project: { name: 1 } }
+])
+
+# Step 5: Exit MongoDB   
+exit
+
+
+
+
+
+
+ Slip 22
+
+WebTech
+Create a web page to create 3D text. Apply all text effects like text shadow,
+text overflow, wordwrap etc
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>3D Text Effects</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .text {
+            font-size: 40px;
+            color: blue;
+            text-shadow: 2px 2px 5px gray;
+            overflow: hidden;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <h1>3D Text Effects</h1>
+    <div class="text">
+        Welcome to 3D Text Effects with Shadow and Wrap!
+    </div>
+</body>
+</html>
+
+
+MongoDB
+
+Model the following Car Showroom information as a graph model,and answer
+ the queries using Cypher. Consider a car showroom with different models of
+ cars like sofas Honda city, Skoda, Creta, Swift, Ertiga etc. Showroom is
+ divided into different sections, onesection for each car model; each section is
+ handled by a sales staff. Asales staff can handle one or more sections.
+ Customer may enquire about car. An enquiry may result in a purchase by the
+ customer.
+1. Identify the labels and relationships, along with their properties, and
+draw a high-level Graph model. [3]
+2. Create nodes and relationships, along with their properties, and
+visualize your actual Graph model. [3]
+3. Answer the following queries:
+a. List the types of cars available in the showroom. [3]
+b. List the sections handled by Mr. Narayan. [3]
+c. List the names of customers who have done only enquiry but not
+made any purchase. [4]
+d. List the highly sale car model. [4]
+
+
+# Step 1: Open MongoDB shell using mongosh
+mongosh
+
+# Step 2: Create a database for the Car Showroom information system
+use car_showroom_db
+
+# Step 3: Create collections for cars, sections, sales staff, and customers
+db.cars.insertMany([
+  { _id: 1, model: "Honda City", type: "Sedan", price: 1200000 },
+  { _id: 2, model: "Skoda", type: "SUV", price: 1500000 },
+  { _id: 3, model: "Creta", type: "SUV", price: 1300000 },
+  { _id: 4, model: "Swift", type: "Hatchback", price: 800000 },
+  { _id: 5, model: "Ertiga", type: "MPV", price: 1100000 }
+])
+
+db.sections.insertMany([
+  { _id: 1, section_name: "Sedan Section", car_model: "Honda City", sales_staff: "Mr. Narayan" },
+  { _id: 2, section_name: "SUV Section", car_model: "Skoda", sales_staff: "Mr. Narayan" },
+  { _id: 3, section_name: "SUV Section", car_model: "Creta", sales_staff: "Mr. Ramesh" },
+  { _id: 4, section_name: "Hatchback Section", car_model: "Swift", sales_staff: "Mr. Priya" },
+  { _id: 5, section_name: "MPV Section", car_model: "Ertiga", sales_staff: "Mr. Priya" }
+])
+
+db.sales_staff.insertMany([
+  { _id: 1, name: "Mr. Narayan", sections_handled: ["Sedan Section", "SUV Section"] },
+  { _id: 2, name: "Mr. Ramesh", sections_handled: ["SUV Section"] },
+  { _id: 3, name: "Mr. Priya", sections_handled: ["Hatchback Section", "MPV Section"] }
+])
+
+db.customers.insertMany([
+  { _id: 1, name: "John", enquiries: ["Honda City", "Swift"], purchases: [] },
+  { _id: 2, name: "Alice", enquiries: ["Skoda", "Ertiga"], purchases: ["Ertiga"] },
+  { _id: 3, name: "Bob", enquiries: ["Creta"], purchases: ["Creta"] },
+  { _id: 4, name: "David", enquiries: ["Swift"], purchases: [] }
+])
+
+# Step 4: Write the Cypher queries to fetch the required results
+
+# a. List the types of cars available in the showroom
+db.cars.aggregate([
+  { $group: { _id: "$type" } }
+])
+
+# b. List the sections handled by Mr. Narayan
+db.sections.aggregate([
+  { $match: { sales_staff: "Mr. Narayan" } },
+  { $project: { section_name: 1 } }
+])
+
+# c. List the names of customers who have done only enquiry but not made any purchase
+db.customers.aggregate([
+  { $match: { $and: [{ enquiries: { $ne: [] } }, { purchases: { $size: 0 } }] } },
+  { $project: { name: 1 } }
+])
+
+# d. List the highly sold car model
+db.customers.aggregate([
+  { $unwind: "$purchases" },
+  { $group: { _id: "$purchases", count: { $sum: 1 } } },
+  { $sort: { count: -1 } },
+  { $limit: 1 },
+  { $project: { model: "$_id", sales_count: "$count" } }
+])
+
+# Step 5: Exit MongoDB shell
+exit
+
+
+
+
+
+
+
+ Slip 23
+
+WebTech
+Create a web page to display image on screen
+Apply the following
+a. Display image in tiles
+b. Rotate image in clockwise and anticlockwise direction
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Tile and Rotation</title>
+    <style>
+        body {
+            text-align: center;
+            margin: 50px;
+        }
+        .image-container {
+            display: grid;
+            grid-template-columns: repeat(3, 200px);
+            gap: 10px;
+            justify-content: center;
+        }
+        .image-container img {
+            width: 100%;
+            transition: transform 1s;
+        }
+        .rotate:hover {
+            transform: rotate(360deg);
+        }
+    </style>
+</head>
+<body>
+    <h1>Image in Tiles with Rotation</h1>
+    <div class="image-container">
+        <img src="#image" class="rotate" alt="Image 1">
+        <img src="#image" class="rotate" alt="Image 2">
+        <img src="#image" class="rotate" alt="Image 3">
+        <img src="#image" class="rotate" alt="Image 4">
+        <img src="#image" class="rotate" alt="Image 5">
+        <img src="#image" class="rotate" alt="Image 6">
+    </div>
+</body>
+</html>
+
+
+
+
+MongoDB
+
+Model the following Automobile information system as a graph model,and
+answer the following queries using Cypher.
+Consider an Automobile industry manufacturing different types of vehicles
+like Two- Wheeler, Four-Wheeler, etc. A customer can buyone or more types
+of vehicle. A person can recommend or rate a vehicletype.
+1. Identify the labels and relationships, along with their properties, and
+draw a high-level Graph model. [3]
+2. Create nodes and relationships, along with their properties, and
+visualize your actual Graph model. [3]
+3. Answer the following Queries:
+a. List the characteristics of four wheeler types. [3]
+b. List the name of customers who bought a two wheeler vehicle. [3]
+c. List the customers who bought more than one type of vehicle. [4]
+d. List the most recommended vehicle type. [4]
+
+# Step 1: Open MongoDB    using mongosh
+mongosh
+
+# Step 2: Create a database for the automobile information system
+use automobile_information_db
+
+# Step 3: Create collections for vehicles, customers, and ratings
+db.vehicles.insertMany([
+  { _id: 1, type: "Two-Wheeler", characteristics: ["Lightweight", "Fuel Efficient", "Compact"], model: "Yamaha FZ", recommended: true },
+  { _id: 2, type: "Four-Wheeler", characteristics: ["Spacious", "Fuel Efficient", "High Speed"], model: "Toyota Corolla", recommended: true },
+  { _id: 3, type: "Two-Wheeler", characteristics: ["Affordable", "Fuel Efficient"], model: "Honda Activa", recommended: false },
+  { _id: 4, type: "Four-Wheeler", characteristics: ["Luxury", "High Speed", "Spacious"], model: "BMW 5 Series", recommended: true },
+  { _id: 5, type: "Two-Wheeler", characteristics: ["Affordable", "Compact"], model: "Suzuki Access", recommended: true }
+])
+
+db.customers.insertMany([
+  { _id: 1, name: "John Doe", purchased_vehicles: [1, 2] },
+  { _id: 2, name: "Jane Smith", purchased_vehicles: [3] },
+  { _id: 3, name: "Alex Johnson", purchased_vehicles: [4, 5] },
+  { _id: 4, name: "Emily Davis", purchased_vehicles: [1] }
+])
+
+# Step 4: Write the Cypher queries to fetch the required results
+
+# a. List the characteristics of four-wheeler types
+db.vehicles.aggregate([
+  { $match: { type: "Four-Wheeler" } },
+  { $project: { model: 1, characteristics: 1 } }
+])
+
+# b. List the names of customers who bought a two-wheeler vehicle
+db.customers.aggregate([
+  { $unwind: "$purchased_vehicles" },
+  { $lookup: {
+      from: "vehicles",
+      localField: "purchased_vehicles",
+      foreignField: "_id",
+      as: "vehicle_details"
+  }},
+  { $match: { "vehicle_details.type": "Two-Wheeler" } },
+  { $project: { name: 1 } }
+])
+
+# c. List the customers who bought more than one type of vehicle
+db.customers.aggregate([
+  { $match: { "purchased_vehicles": { $size: { $gt: 1 } } } },
+  { $project: { name: 1 } }
+])
+
+# d. List the most recommended vehicle type
+db.vehicles.aggregate([
+  { $match: { recommended: true } },
+  { $group: { _id: "$type", count: { $sum: 1 } } },
+  { $sort: { count: -1 } },
+  { $limit: 1 }
+])
+
+# Step 5: Exit MongoDB   
+exit
+
+
+
+
+ Slip 24
+
+WebTech
+Create an html page named as “calendar.html”
+ Use necessary input types and get following output
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Input Types Examples</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+        }
+        form {
+            display: inline-block;
+            text-align: left;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <h1>Input Types Examples</h1>
+
+    <form>
+        <h4 for="date">Date:</h4>
+        <input type="date" id="date" name="date"><br>
+
+        <h4 for="datetime">Datetime:</h4>
+        <input type="datetime" id="datetime" name="datetime"><br>
+
+        <h4 for="datetime-local">Datetime-local:</h4>
+        <input type="datetime-local" id="datetime-local" name="datetime-local"><br>
+
+        <h4 for="month">Month:</h4>
+        <input type="month" id="month" name="month"><br>
+
+        <h4 for="time">Time:</h4>
+        <input type="time" id="time" name="time"><br>
+
+        <h4 for="week">Week:</h4>
+        <input type="week" id="week" name="week"><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
+
+
+
+MongoDB
+
+Model the following Library information system as a graph model,and answer
+the following queries using Cypher.
+Consider a library information system having different types of books like text,
+reference, bibliography etc. A student can buy one or more types of book. A
+student can recommend or rate a book according to its type.
+1. Identify the labels and relationships, along with their properties, and
+draw a high-level Graph model. [3]
+2. Create nodes and relationships, along with their properties, and
+visualize your actual Graph model. [3]
+3. Answer the following Queries :
+a. List the books of type “text” [3]
+b. List the name of student who bought a text and reference types
+books.[3]
+c. List the most recommended book type. [4]
+d. List the student who buy the more than one type of book [4]
+
+
+# Step 1: Open MongoDB    using mongosh
+mongosh
+
+# Step 2: Create a database for the Library information system
+use library_information_db
+
+# Step 3: Create collections for students, books, and book types
+db.books.insertMany([
+  { _id: 1, name: "Data Structures", type: "text", rating: 4.5 },
+  { _id: 2, name: "Introduction to Algorithms", type: "reference", rating: 4.7 },
+  { _id: 3, name: "Advanced Databases", type: "bibliography", rating: 4.3 },
+  { _id: 4, name: "Artificial Intelligence", type: "text", rating: 4.9 },
+  { _id: 5, name: "Machine Learning", type: "reference", rating: 4.8 }
+])
+
+db.students.insertMany([
+  { _id: 1, name: "John", books_bought: ["text", "reference"], recommendations: { "Data Structures": 5, "Introduction to Algorithms": 4.5 } },
+  { _id: 2, name: "Alice", books_bought: ["text", "bibliography"], recommendations: { "Artificial Intelligence": 5, "Advanced Databases": 4 } },
+  { _id: 3, name: "Bob", books_bought: ["reference"], recommendations: { "Machine Learning": 4.5 } }
+])
+
+# Step 4: Write the Cypher queries to fetch the required results
+
+# a. List the books of type “text”
+db.books.aggregate([
+  { $match: { type: "text" } },
+  { $project: { name: 1, type: 1 } }
+])
+
+# b. List the name of students who bought both "text" and "reference" types of books
+db.students.aggregate([
+  { $match: { books_bought: { $all: ["text", "reference"] } } },
+  { $project: { name: 1 } }
+])
+
+# c. List the most recommended book type
+db.books.aggregate([
+  { $group: { _id: "$type", avg_rating: { $avg: "$rating" } } },
+  { $sort: { avg_rating: -1 } },
+  { $limit: 1 },
+  { $project: { _id: 0, type: "$_id", avg_rating: 1 } }
+])
+
+# d. List the students who bought more than one type of book
+db.students.aggregate([
+  { $match: { books_bought: { $size: { $gte: 2 } } } },
+  { $project: { name: 1 } }
+])
+
+# Step 5: Exit MongoDB   
+exit
+
+
+
+
+
+
+ Slip 25
+
+WebTech
+Write the HTML5 code for generating the form as shown below. Apply the
+internal CSS to the following form to set the font size, font color, heading ,
+background color etc.
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Entry Form</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: white;
+        }
+        .form-container {
+            width: 300px;
+            padding: 20px;
+            background-color: skyblue;
+            border: 2px solid black;
+        }
+        h4 {
+            color: red;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 5px;
+            margin: 5px 0;
+        }
+        .form-actions button {
+            padding: 5px 10px;
+        }
+        .inline {
+            display: inline-block;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2 style="text-align:center; color:red;">ENTRY FORM</h2>
+        <form>
+            <h4>Name:</h4>
+            <input type="text" name="name">
+
+            <h4>Age:</h4>
+            <input type="number" name="age">
+
+            <h4>Address:</h4>
+            <textarea rows="3"></textarea>
+
+            <h4>Sex:</h4>
+            <span class="inline"><input type="radio" name="sex" value="female"> Female</span>
+            <span class="inline"><input type="radio" name="sex" value="male"> Male</span>
+
+            <h4>Nationality:</h4>
+            <select>
+                <option>India</option>
+                <option>USA</option>
+                <option>UK</option>
+                <option>Canada</option>
+            </select>
+
+            <h4>Languages Known:</h4>
+            <span class="inline"><input type="checkbox" value="C"> C</span>
+            <span class="inline"><input type="checkbox" value="C++"> C++</span>
+            <span class="inline"><input type="checkbox" value="JAVA"> JAVA</span>
+
+            <h4>Password:</h4>
+            <input type="password" name="password">
+
+            <div class="form-actions">
+                <button type="reset">Reset</button>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+
+
+MongoDB
+
+Model the following University information system as a graph model, and
+answer the following queries using Cypher.
+University has various departments like Physics, Geography, Computer etc.
+Each department conducts various courses and a course may be conducted by
+multiple departments. Every course may have recommendations provided by
+people.
+1. Identify the labels and relationships, along with their properties, anddraw
+a high-level Graph model. [3]
+2. Create nodes and relationships, along with their properties, and
+visualize your actual Graph model. [3]
+3. Answer the following Queries :
+a. List the details of all the departments in the university. [3]
+b. List the names of the courses provided by Physics department. [3]
+c. List the most recommended course in Geography department. [4]
+d. List the names of common courses across Mathematics and
+computer department. [4]
+
+# Step 1: Open MongoDB    using mongosh
+mongosh
+
+# Step 2: Create a database for the Library information system
+use library_information_db
+
+# Step 3: Create collections for students, books, and book types
+db.books.insertMany([
+  { _id: 1, name: "Data Structures", type: "text", rating: 4.5 },
+  { _id: 2, name: "Introduction to Algorithms", type: "reference", rating: 4.7 },
+  { _id: 3, name: "Advanced Databases", type: "bibliography", rating: 4.3 },
+  { _id: 4, name: "Artificial Intelligence", type: "text", rating: 4.9 },
+  { _id: 5, name: "Machine Learning", type: "reference", rating: 4.8 }
+])
+
+db.students.insertMany([
+  { _id: 1, name: "John", books_bought: ["text", "reference"], recommendations: { "Data Structures": 5, "Introduction to Algorithms": 4.5 } },
+  { _id: 2, name: "Alice", books_bought: ["text", "bibliography"], recommendations: { "Artificial Intelligence": 5, "Advanced Databases": 4 } },
+  { _id: 3, name: "Bob", books_bought: ["reference"], recommendations: { "Machine Learning": 4.5 } }
+])
+
+# Step 4: Write the Cypher queries to fetch the required results
+
+# a. List the books of type “text”
+db.books.aggregate([
+  { $match: { type: "text" } },
+  { $project: { name: 1, type: 1 } }
+])
+
+# b. List the name of students who bought both "text" and "reference" types of books
+db.students.aggregate([
+  { $match: { books_bought: { $all: ["text", "reference"] } } },
+  { $project: { name: 1 } }
+])
+
+# c. List the most recommended book type
+db.books.aggregate([
+  { $group: { _id: "$type", avg_rating: { $avg: "$rating" } } },
+  { $sort: { avg_rating: -1 } },
+  { $limit: 1 },
+  { $project: { _id: 0, type: "$_id", avg_rating: 1 } }
+])
+
+# d. List the students who bought more than one type of book
+db.students.aggregate([
+  { $match: { books_bought: { $size: { $gte: 2 } } } },
+  { $project: { name: 1 } }
+])
+
+# Step 5: Exit MongoDB   
+exit
+
+
+
